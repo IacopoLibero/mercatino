@@ -87,7 +87,12 @@ if ($_SESSION['log'] == false) {
             </div>
             <div class="user text-center">
                 <div class="profile">
-                    <img src="https://i.imgur.com/JgYD2nQ.jpg" class="rounded-circle" width="80">
+                    <img src="" class="rounded-circle" width="80" id="openModal">
+                </div>
+                <div class="modal" id="modal">
+                    <div class="modal-inner">
+                        <!-- da fare inserimento img profilo https://www.youtube.com/watch?v=r_PL0K2fGkY -->
+                    </div>
                 </div>
             </div>
             <div class="mt-5 text-center">
@@ -108,14 +113,47 @@ if ($_SESSION['log'] == false) {
                         $query = "SELECT classe FROM utente WHERE id='$id'";
                         $result = $conn->query($query);
                         $row = $result->fetch_assoc();
-                        echo $row['classe'];
+                        echo "Classe: ".$row['classe']."  ";
+                        function calcolaEta($dataNascita) 
+                        {
+                            // Crea un oggetto DateTime dalla data di nascita
+                            $dataNascita = new DateTime($dataNascita);
+                            
+                            // Ottieni la data corrente
+                            $dataCorrente = new DateTime();
+                            
+                            // Calcola la differenza tra le due date
+                            $differenza = $dataNascita->diff($dataCorrente);
+                            
+                            // Ottieni l'età dall'intervallo di differenza
+                            $eta = $differenza->y;
+                            
+                            return $eta;
+                        }
+                        
+                        // Utilizzo della funzione
+                        $sql = "SELECT eta FROM utente WHERE id = $id"; // Data di nascita dell'utente
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        $dataNascita = $row["eta"];
+                        $eta = calcolaEta($dataNascita);
+                        echo "Eta: $eta";
+                        
                     ?>
                 </span>
                 <hr>
                 <div class="justify-content-between align-items-center text-center mt-4 px-4">
                     <div class="stats text-center">
                         <h6 class="mb-0">Annunci attivi</h6>
-                        <span>129</span>
+                        <span>
+                            <?php
+                                $id = $_SESSION['id'];
+                                $query = "SELECT COUNT(*) as num FROM annuncio WHERE idUtente='$id'";
+                                $result = $conn->query($query);
+                                $row = $result->fetch_assoc();
+                                echo $row['num'];
+                           ?>
+                        </span>
 
                     </div>
                 </div>
