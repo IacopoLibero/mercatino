@@ -13,25 +13,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
     <title>Document</title>
 </head>
-<body>
+<body id="background" >
     <div class="row">
-        <div class="card mx-auto my-5" style="width: 18rem; border-color: blue; border-style: solid;" >
+        <div class="card mx-auto my-5" style="width: 18rem;">
             <div class="card-body text-center" >
             
-            <h5 class="card-title">Login</h5>
-            <form method="POST" action="./login/login.php">
-                Email: <br>
-                <input type="email" name="email" required placeholder="cognome.nome@itismeucci.com" class="form-control"><br>
-        
-                Password: <br>
-                <div class="input-group">
-                    <input type="password" name="pw" id="psw" required placeholder="password" class="form-control">
-                    <span class="input-group-text" >
-                        <i class="bi bi-eye-slash-fill" id="eye"></i>
-                    </span>
+                <h1 class="display-3 card-title poetsen-one-regular">Login</h1>
+            
+                <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label poetsen-one-regular" style="font-family: 48px" >Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                 </div>
+                <label for="inputPassword5" class="form-label poetsen-one-regular" style="font-family: 48px">Password</label>
+                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                <div id="passwordHelpBlock" class="form-text">
+                Your password must be 8-20 characters long
+                </div>
+
+
                 
                 
                 <?php
