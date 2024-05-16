@@ -93,6 +93,7 @@ if ($_SESSION['log'] == false) {
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $url = $row["foto_profilo"];
+                        
 
                         if($url != NULL)
                         {
@@ -104,19 +105,19 @@ if ($_SESSION['log'] == false) {
                         }
                     ?>
                 </div>
-                <!-- 
+                
                 <div class="modal" id="modal">
                     <div class="modal-inner">
-                        <form method="post" action="gestione.php" enctype="multipart/form-data">
+                        <form method="post" action="../back-end/img_profilo.php" enctype="multipart/form-data">
                             <label for="file">Seleziona un'immagine da caricare</label>
                             <br><br>
                             <input type="file" name="imgprofilo" accept="image/png, image/gif, image/jpeg">
                             <br><br>
-                            <input type="submit" value="INVIA" name="submit">
+                            <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
                         </form>
                     </div>
                 </div>
-                -->
+                
             </div>
 
 
@@ -177,7 +178,7 @@ if ($_SESSION['log'] == false) {
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script src="../js/scripts.js"></script>
 </body>
 
 </html>
