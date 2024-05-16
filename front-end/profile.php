@@ -13,7 +13,7 @@ if ($_SESSION['log'] == false) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>home page</title>
+    <title>Your profile</title>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -85,16 +85,41 @@ if ($_SESSION['log'] == false) {
             <div class="upper">
                 <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
             </div>
+
             <div class="user text-center">
                 <div class="profile">
-                    <img src="" class="rounded-circle" width="80" id="openModal">
+                    <?php
+                        $sql = "SELECT foto_profilo FROM utente WHERE id = '$id'";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        $url = $row["foto_profilo"];
+
+                        if($url != NULL)
+                        {
+                            echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
+                        }
+                        else
+                        {
+                            echo "<img src='../img/empty.png' class='rounded-circle' width='80' id='openModal'>";
+                        }
+                    ?>
                 </div>
+                <!-- 
                 <div class="modal" id="modal">
                     <div class="modal-inner">
-                        <!-- da fare inserimento img profilo https://www.youtube.com/watch?v=r_PL0K2fGkY -->
+                        <form method="post" action="gestione.php" enctype="multipart/form-data">
+                            <label for="file">Seleziona un'immagine da caricare</label>
+                            <br><br>
+                            <input type="file" name="imgprofilo" accept="image/png, image/gif, image/jpeg">
+                            <br><br>
+                            <input type="submit" value="INVIA" name="submit">
+                        </form>
                     </div>
                 </div>
+                -->
             </div>
+
+
             <div class="mt-5 text-center">
                 <h4 class="mb-0">
                     <?php
@@ -116,29 +141,18 @@ if ($_SESSION['log'] == false) {
                         echo "Classe: ".$row['classe']."  ";
                         function calcolaEta($dataNascita) 
                         {
-                            // Crea un oggetto DateTime dalla data di nascita
                             $dataNascita = new DateTime($dataNascita);
-                            
-                            // Ottieni la data corrente
                             $dataCorrente = new DateTime();
-                            
-                            // Calcola la differenza tra le due date
                             $differenza = $dataNascita->diff($dataCorrente);
-                            
-                            // Ottieni l'età dall'intervallo di differenza
                             $eta = $differenza->y;
-                            
                             return $eta;
                         }
-                        
-                        // Utilizzo della funzione
-                        $sql = "SELECT eta FROM utente WHERE id = $id"; // Data di nascita dell'utente
+                        $sql = "SELECT eta FROM utente WHERE id = $id";
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $dataNascita = $row["eta"];
                         $eta = calcolaEta($dataNascita);
                         echo "Eta: $eta";
-                        
                     ?>
                 </span>
                 <hr>
@@ -152,7 +166,7 @@ if ($_SESSION['log'] == false) {
                                 $result = $conn->query($query);
                                 $row = $result->fetch_assoc();
                                 echo $row['num'];
-                           ?>
+                            ?>
                         </span>
 
                     </div>

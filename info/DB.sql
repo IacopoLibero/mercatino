@@ -7,6 +7,7 @@ CREATE TABLE Utente (
 	password VARCHAR(64),
 	classe VARCHAR(2),
 	username VARCHAR(50),
+    foto_profilo VARCHAR(50),
 	data_n DATETIME
 );
 CREATE TABLE Categoria (
