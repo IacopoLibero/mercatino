@@ -35,7 +35,10 @@
 
                 Username: <br>
                 <input type="text" name="username" class="form-control" required placeholder="username1"><br>
-        
+                
+                Data di nascita: <br>
+                <input type="date" name="data_nascita" class="form-control" placeholder="yyyy-mm-dd"><br>
+
                 Password: <br>
                 <div class="input-group">
                     <input type="password" name="pw" id="psw" required placeholder="password" class="form-control">

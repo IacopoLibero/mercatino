@@ -3,6 +3,7 @@ CREATE TABLE Utente (
 	nome VARCHAR(50),
     cognome VARCHAR(50),
 	email VARCHAR(50) UNIQUE,
+    eta date,
 	password VARCHAR(64),
 	classe VARCHAR(2),
 	username VARCHAR(50),
