@@ -57,12 +57,12 @@ if ($_SESSION['log'] == false) {
                                 Proposte ricevute
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">
                                     <?php
-                                    include ('../connessione.php');
-                                    $id = $_SESSION['id'];
-                                    $query = "SELECT COUNT(*) as num FROM proposta JOIN annuncio ON annuncio.id=proposta.idAnnuncio WHERE annuncio.idUtente='$id'";
-                                    $result = $conn->query($query);
-                                    $row = $result->fetch_assoc();
-                                    echo $row['num'];
+                                        include ('../connessione.php');
+                                        $id = $_SESSION['id'];
+                                        $query = "SELECT COUNT(*) as num FROM proposta JOIN annuncio ON annuncio.id=proposta.idAnnuncio WHERE annuncio.idUtente='$id'";
+                                        $result = $conn->query($query);
+                                        $row = $result->fetch_assoc();
+                                        echo $row['num'];
                                     ?>
                                 </span>
                             </button>
@@ -93,34 +93,35 @@ if ($_SESSION['log'] == false) {
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $url = $row["foto_profilo"];
-                        
-
-                        if($url != NULL)
-                        {
-                            echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
-                        }
-                        else
-                        {
-                            echo "<img src='../img/empty.png' class='rounded-circle' width='80' id='openModal'>";
-                        }
+                        echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
                     ?>
                 </div>
                 
                 <div class="modal" id="modal">
                     <div class="modal-inner">
-                        <form method="post" action="../back-end/img_profilo.php" enctype="multipart/form-data">
+                        <form method="POST" action="../back-end/img_profilo.php" enctype="multipart/form-data">
+                            <div>
+                                <?php
+                                    $sql = "SELECT foto_profilo FROM utente WHERE id = '$id'";
+                                    $result = $conn->query($sql);
+                                    $row = $result->fetch_assoc();
+                                    $url = $row["foto_profilo"];
+                                    echo "<img src='$url' class='rounded-circle' width='150'  height='150' id='openModal'>";
+                                ?>
+                            </div>
                             <label for="file">Seleziona un'immagine da caricare</label>
                             <br><br>
-                            <input type="file" name="imgprofilo" accept="image/png, image/gif, image/jpeg">
+                            <input type="file" name="imgprofilo" class="text-center" accept="image/png, image/gif, image/jpeg">
                             <br><br>
-                            <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
+                            <div>
+                                <button class="button" id="closeModal">CHIUDI</button>
+                                <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
+                            </div>
                         </form>
                     </div>
                 </div>
                 
             </div>
-
-
             <div class="mt-5 text-center">
                 <h4 class="mb-0">
                     <?php
@@ -169,7 +170,6 @@ if ($_SESSION['log'] == false) {
                                 echo $row['num'];
                             ?>
                         </span>
-
                     </div>
                 </div>
             </div>
@@ -180,5 +180,4 @@ if ($_SESSION['log'] == false) {
     <!-- Core theme JS-->
     <script src="../js/scripts.js"></script>
 </body>
-
 </html>

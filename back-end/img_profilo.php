@@ -4,7 +4,7 @@
     include("../connessione.php");
     $id=$_SESSION['id'];
 
-    $target_dir = "upload/";
+    $target_dir = "../upload/";
     $target_file = $target_dir . $_FILES["imgprofilo"]["name"];
     $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -19,7 +19,6 @@
     {
         $sql = "UPDATE utente SET foto_profilo = '$target_file' WHERE id = '$id'";
         $result = $conn->query($sql);
-        $_SESSION["foto"] = "Il file è stato caricato correttamente";
         header("Location: ../front-end/profile.php");
     }
     else
