@@ -177,6 +177,37 @@ if ($_SESSION['log'] == false) {
             </div>
         </div>
     </div>
+    <div>
+        <div class="container mt-5">
+            <h2>I tuoi annunci</h2>
+            <?php
+                $id = $_SESSION['id'];
+                $query = "SELECT * FROM annuncio WHERE idUtente='$id'";
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) 
+                {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='card mb-3'>";
+                        echo "<div class='row g-0'>";
+                        echo "<div class='col-md-4'>";
+                        echo "<img src='" . $row['immagine'] . "' class='img-fluid' alt='Annuncio'>";
+                        echo "</div>";
+                        echo "<div class='col-md-8'>";
+                        echo "<div class='card-body'>";
+                        echo "<h5 class='card-title'>" . $row['titolo'] . "</h5>";
+                        echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
+                        echo "<p class='card-text'><small class='text-muted'>Creato il " . $row['data_creazione'] . "</small></p>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>Nessun annuncio trovato.</p>";
+                }
+            ?>
+        </div>
+    </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
