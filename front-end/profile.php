@@ -172,6 +172,8 @@ if ($_SESSION['log'] == false) {
                         </span>
                     </div>
                 </div>
+                <hr>
+                <a href="../login/logout.php"><button class="my-2" style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">logout</button></a>
             </div>
         </div>
     </div>
