@@ -22,6 +22,7 @@ CREATE TABLE Annuncio (
     id INT PRIMARY KEY AUTO_INCREMENT,
     idUtente INT,
     idCategoria INT,
+    descrizione VARCHAR(150),
     urlFoto VARCHAR(50),
     FOREIGN KEY (idUtente) REFERENCES Utente(id) ON DELETE CASCADE,
     FOREIGN KEY (idCategoria) REFERENCES Categoria(id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -43,3 +44,5 @@ ALTER TABLE Foto
 	ADD FOREIGN KEY (idAnnuncio) REFERENCES Annuncio(id) 
 		ON DELETE CASCADE 
 		ON UPDATE CASCADE;
+
+INSERT INTO Categoria (nome) VALUES ('telefonia'),('videogiochi'),('informatica'),('libri');

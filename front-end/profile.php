@@ -173,41 +173,64 @@ if ($_SESSION['log'] == false) {
                     </div>
                 </div>
                 <hr>
-                <a href="../login/logout.php"><button class="my-2" style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">logout</button></a>
+                <div>
+                    <a href="../login/logout.php"><button class="my-2" style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">logout</button></a>
+                    <button class="my-2" id='openModalarticolo' style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">carica articolo</button>
+                    <div class="modal" id="modalarticolo">
+                        <div class="modal-inner">
+                            <form method="POST" action="../back-end/upload.php" enctype="multipart/form-data">
+                                
+                                <label>Seleziona una o piu immagini per il tuo annuncio</label>
+                                <br><br>
+                                <input type="file" name="imgprofilo" class="text-center" accept="image/png, image/gif, image/jpeg">
+                                <br><br>
+                                <label>Descrizione (max 150 caratteri)</label>
+                                <input type="text" name="descrizione" class="text-center">
+                                <div>
+                                    <button class="button" id="closeModalarticolo">CHIUDI</button>
+                                    <input type="submit" class="button" value="CARICA" name="submit" id="closeModalarticolo">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div>
-        <div class="container mt-5">
-            <h2>I tuoi annunci</h2>
-            <?php
-                $id = $_SESSION['id'];
-                $query = "SELECT * FROM annuncio WHERE idUtente='$id'";
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) 
-                {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<div class='card mb-3'>";
-                        echo "<div class='row g-0'>";
-                        echo "<div class='col-md-4'>";
-                        echo "<img src='" . $row['immagine'] . "' class='img-fluid' alt='Annuncio'>";
-                        echo "</div>";
-                        echo "<div class='col-md-8'>";
-                        echo "<div class='card-body'>";
-                        echo "<h5 class='card-title'>" . $row['titolo'] . "</h5>";
-                        echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
-                        echo "<p class='card-text'><small class='text-muted'>Creato il " . $row['data_creazione'] . "</small></p>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</div>";
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <?php
+                    $id = $_SESSION['id'];
+                    $query = "SELECT * FROM annuncio JOIN categoria ON annuncio.idCategoria=categoria.id WHERE idUtente='$id'";
+                    $result = $conn->query($query);
+                    if ($result->num_rows > 0) 
+                    {
+                        while ($row = $result->fetch_assoc()) 
+                        {
+                            echo "<div class='col mb-5'>";
+                                echo "<div class='card h-100'>";
+                                    echo "<img class='card-img-top' src='" . $row['urlFoto'] . "' />";
+                                    echo "<div class='card-body p-4'>";
+                                        echo "<div class='text-center'>";
+                                            echo "<h5 class='fw-bolder'>" . $row['titolo'] . "</h5>";
+                                            echo $row['descrizione'];
+                                        echo "</div>";
+                                    echo "</div>";
+                                    echo "<div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>";
+                                        echo "<div class='text-center'><a class='btn btn-outline-dark mt-auto' href='#'>View options</a></div>";
+                                    echo "</div>";
+                                echo "</div>";
+                        }
+                    } 
+                    else 
+                    {
+                        echo "<p>Nessun annuncio caricato.</p>";
                     }
-                } else {
-                    echo "<p>Nessun annuncio trovato.</p>";
-                }
-            ?>
+                ?>
+            </div>
         </div>
-    </div>
+    </section>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
