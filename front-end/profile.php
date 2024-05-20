@@ -9,14 +9,22 @@ if ($_SESSION['log'] == false) {
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Your profile</title>
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+
     <link href="../css/home.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/profile.css">
 </head>
@@ -175,25 +183,7 @@ if ($_SESSION['log'] == false) {
                 <hr>
                 <div>
                     <a href="../login/logout.php"><button class="my-2" style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">logout</button></a>
-                    <button class="my-2" id='openModalarticolo' style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">carica articolo</button>
-                    <div class="modal" id="modalarticolo">
-                        <div class="modal-inner">
-                            <form method="POST" action="../back-end/upload.php" enctype="multipart/form-data">
-                                
-                                <label>Seleziona una o piu immagini per il tuo annuncio</label>
-                                <br><br>
-                                <input type="file" name="img_articolo" class="text-center" accept="image/*" multiple>
-                                <br><br>
-                                <label>Descrizione (max 150 caratteri)</label>
-                                <input type="text" name="descrizione" class="text-center">
-                                <br><br>
-                                <div>
-                                    <button type="button" class="button" id="closeModalarticolo">CHIUDI</button>
-                                    <input type="submit" class="button" value="CARICA" name="submit" id="submitModalarticolo">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <a href="../front-end/insert_item.php"><button class="my-2" id='openModalarticolo' style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">carica articolo</button></a>
                 </div>
             </div>
         </div>
@@ -235,6 +225,6 @@ if ($_SESSION['log'] == false) {
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/scripts.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
