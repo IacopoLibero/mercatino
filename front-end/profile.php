@@ -111,10 +111,10 @@ if ($_SESSION['log'] == false) {
                             </div>
                             <label for="file">Seleziona un'immagine da caricare</label>
                             <br><br>
-                            <input type="file" name="imgprofilo" class="text-center" accept="image/png, image/gif, image/jpeg">
+                            <input type="file" name="imgprofilo" class="text-center" accept="image/*">
                             <br><br>
                             <div>
-                                <button class="button" id="closeModal">CHIUDI</button>
+                                <button type="button" class="button" id="closeModal">CHIUDI</button>
                                 <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
                             </div>
                         </form>
@@ -182,13 +182,14 @@ if ($_SESSION['log'] == false) {
                                 
                                 <label>Seleziona una o piu immagini per il tuo annuncio</label>
                                 <br><br>
-                                <input type="file" name="imgprofilo" class="text-center" accept="image/png, image/gif, image/jpeg">
+                                <input type="file" name="img_articolo" class="text-center" accept="image/*" multiple>
                                 <br><br>
                                 <label>Descrizione (max 150 caratteri)</label>
                                 <input type="text" name="descrizione" class="text-center">
+                                <br><br>
                                 <div>
-                                    <button class="button" id="closeModalarticolo">CHIUDI</button>
-                                    <input type="submit" class="button" value="CARICA" name="submit" id="closeModalarticolo">
+                                    <button type="button" class="button" id="closeModalarticolo">CHIUDI</button>
+                                    <input type="submit" class="button" value="CARICA" name="submit" id="submitModalarticolo">
                                 </div>
                             </form>
                         </div>
