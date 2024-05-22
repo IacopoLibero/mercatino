@@ -24,7 +24,6 @@ if ($_SESSION['log'] == false) {
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
 
     <link href="../css/home.css" rel="stylesheet" />
-    <link href="../css/index.css" rel="stylesheet" />
     <link href="../css/insert.css" rel="stylesheet" />
 
 </head>
@@ -103,12 +102,15 @@ if ($_SESSION['log'] == false) {
                     <p id="num-of-files">No Files Chosen</p>
                     <div id="images"></div>
                 </div>
+                
                 <?php
-                    if (isset($_FILES['img_articolo']) && count($_FILES['img_articolo']['name']) > 10) 
-                    {
-                        echo "<p class='text-danger'>Puoi selezionare al massimo 10 immagini, quelle in piu verranno scartate</p>";
-                    }
+                if(isset($_session['caricamento']))
+                    echo $_session['caricamento'];
+                    
                 ?>
+                <br>
+                <label class="form-label poetsen-one-regular" style="font-family: 48px">Nome articolo</label>
+                <input type="text" name="nome" aria-label="Large" class="form-control text-center">
                 <br>
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Descrizione (max 150 caratteri)</label>
                 <input type="text" name="descrizione" aria-label="Large" class="form-control text-center">
