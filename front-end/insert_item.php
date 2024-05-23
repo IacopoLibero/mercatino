@@ -66,7 +66,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                         include ('../connessione.php');
                                         $id = $_SESSION['id'];
-                                        $query = "SELECT COUNT(*) as num FROM Proposta JOIN annuncio ON annuncio.id=Proposta.idAnnuncio WHERE annuncio.idUtente='$id'";
+                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];

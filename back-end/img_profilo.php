@@ -4,7 +4,7 @@
     include("../connessione.php");
     $id=$_SESSION['id'];
 
-    $target_dir = "../img/";
+    $target_dir = "../upload/";
     $target_file = $target_dir . $_FILES["imgprofilo"]["name"];
     $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
