@@ -11,7 +11,7 @@
     $password = hash("sha256",$_POST['pw']);
 
     # Controllo se l'Utente è già registrato
-    $checkQuery = "SELECT * FROM Utente WHERE username = '$username'";
+    $checkQuery = "SELECT * FROM Utente WHERE email = '$email'";
     $result = $conn->query($checkQuery);
     # Se non è registrato lo inserisco nel database, altrimenti mostro un errore
     if($result->num_rows == 0)

@@ -1,9 +1,9 @@
 <?php
     // Definizione delle variabili per la connessione al database
     $servername = "localhost";
-    $username = "root";
+    $username = "bernabei5c1";
     $password = "";
-    $dbname = "mercatino";
+    $dbname = "my_bernabei5c1";
     mysqli_report(MYSQLI_REPORT_OFF);  // Serve a disabilitare le eccezioni nelle nuove versioni di PHP
 
     // Creazione della connessione al database
