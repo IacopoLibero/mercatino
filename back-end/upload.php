@@ -58,7 +58,7 @@
         if($caricamenti_a_buon_fine==$countfiles)
         {
             $_SESSION["caricamento"] = "Caricamento avvenuto con successo";
-            header("Location: ../front-end/insert_item.php");
+            header("Location: ../front-end/profile.php");
         }
         else
         {
@@ -67,7 +67,7 @@
             $conn->query($sql);
             $sql="DELETE FROM annuncio WHERE idAnnuncio='$idAnnuncio'";
             $conn->query($sql);
-            header("Location: ../front-end/insert_item.php");
+            header("Location: ../front-end/profile.php");
         }
         
     }

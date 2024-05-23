@@ -33,13 +33,27 @@ CREATE TABLE Proposta (
     id INT PRIMARY KEY AUTO_INCREMENT,
     prezzo INT,
     data_pubblicazione DATETIME,
-    /*statoAnnuncio BOOLEAN,*/
+    statoAnnuncio BOOLEAN,
     idAnnuncio INT,
     idUtente INT,
-    /*FOREIGN KEY (statoAnnuncio) REFERENCES Annuncio(stato) ON UPDATE CASCADE,*/
     FOREIGN KEY (idAnnuncio) REFERENCES Annuncio(id) ON DELETE CASCADE,
     FOREIGN KEY (idUtente) REFERENCES Utente(id) ON DELETE CASCADE
 );
+
+DELIMITER //
+
+CREATE TRIGGER update_stato_proposta
+AFTER UPDATE ON Annuncio
+FOR EACH ROW
+BEGIN
+    IF NEW.stato <> OLD.stato THEN
+        UPDATE Proposta
+        SET statoAnnuncio = NEW.stato
+        WHERE idAnnuncio = NEW.id;
+    END IF;
+END //
+
+DELIMITER ;
 
 ALTER TABLE Foto
 	ADD FOREIGN KEY (idAnnuncio) REFERENCES Annuncio(id) 
