@@ -97,11 +97,8 @@ if ($_SESSION['log'] == false) {
             <div class="user text-center">
                 <div class="profile">
                     <?php
-                        $sql = "SELECT foto_profilo FROM utente WHERE id = '$id'";
-                        $result = $conn->query($sql);
-                        $row = $result->fetch_assoc();
-                        $url = $row["foto_profilo"];
-                        echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
+                        
+                        echo "<img src='' class='rounded-circle' width='80' id='openModal'>";
                     ?>
                 </div>
                 
@@ -110,7 +107,7 @@ if ($_SESSION['log'] == false) {
                         <form method="POST" action="../back-end/img_profilo.php" enctype="multipart/form-data">
                             <div>
                                 <?php
-                                    $sql = "SELECT foto_profilo FROM utente WHERE id = '$id'";
+                                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
                                     $result = $conn->query($sql);
                                     $row = $result->fetch_assoc();
                                     $url = $row["foto_profilo"];
@@ -133,8 +130,9 @@ if ($_SESSION['log'] == false) {
             <div class="mt-5 text-center">
                 <h4 class="mb-0">
                     <?php
+                
                         $id = $_SESSION['id'];
-                        $query = "SELECT nome,cognome FROM utente WHERE id='$id'";
+                        $query = "SELECT nome,cognome FROM Utente WHERE id='$id'";
                         $result = $conn->query($query);
                         $row = $result->fetch_assoc();
                         echo $row['nome'];
@@ -145,7 +143,7 @@ if ($_SESSION['log'] == false) {
                 <span class="text-muted d-block mb-2">
                     <?php
                         $id = $_SESSION['id'];
-                        $query = "SELECT classe FROM utente WHERE id='$id'";
+                        $query = "SELECT classe FROM Utente WHERE id='$id'";
                         $result = $conn->query($query);
                         $row = $result->fetch_assoc();
                         echo "Classe: ".$row['classe']."  ";
@@ -157,7 +155,7 @@ if ($_SESSION['log'] == false) {
                             $eta = $differenza->y;
                             return $eta;
                         }
-                        $sql = "SELECT eta FROM utente WHERE id = $id";
+                        $sql = "SELECT eta FROM Utente WHERE id = $id";
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $dataNascita = $row["eta"];
@@ -172,7 +170,7 @@ if ($_SESSION['log'] == false) {
                         <span>
                             <?php
                                 $id = $_SESSION['id'];
-                                $query = "SELECT COUNT(*) as num FROM annuncio WHERE idUtente='$id'";
+                                $query = "SELECT COUNT(*) as num FROM Annuncio WHERE idUtente='$id'";
                                 $result = $conn->query($query);
                                 $row = $result->fetch_assoc();
                                 echo $row['num'];
@@ -193,7 +191,7 @@ if ($_SESSION['log'] == false) {
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
                     $id = $_SESSION['id'];
-                    $query = "SELECT * FROM annuncio JOIN categoria ON annuncio.idCategoria=categoria.id WHERE idUtente='$id'";
+                    $query = "SELECT * FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id WHERE idUtente='$id'";
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) 
                     {

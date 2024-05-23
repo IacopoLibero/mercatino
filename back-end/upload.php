@@ -9,7 +9,7 @@
         $descrizione=$_POST['descrizione'];
         $categotia=$_POST['categoria'];
         $nome=$_POST['nome'];
-        $sql="INSERT INTO annuncio (idUtente,nome,idCategoria,descrizione) VALUES ('$id','$nome','$categotia','$descrizione')";
+        $sql="INSERT INTO Annuncio (idUtente,nome,idCategoria,descrizione) VALUES ('$id','$nome','$categotia','$descrizione')";
         $conn->query($sql);
         $idAnnuncio = $conn->insert_id;
 
@@ -29,7 +29,7 @@
 
             // Check if the file name already exists in the database
             $existingFileName = $target_dir.$_FILES['img_articolo']['name'][$i];
-            $sql = "SELECT * FROM foto WHERE url_foto = '$existingFileName'";
+            $sql = "SELECT * FROM Foto WHERE url_foto = '$existingFileName'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -47,7 +47,7 @@
             // Upload file
             if(move_uploaded_file($_FILES['img_articolo']['tmp_name'][$i],$filename))
             {
-                $sql="INSERT INTO foto (url_foto,idAnnuncio) VALUES ('$filename','$idAnnuncio')";
+                $sql="INSERT INTO Foto (url_foto,idAnnuncio) VALUES ('$filename','$idAnnuncio')";
                 $res=$conn->query($sql);
                 if($res)
                 {
@@ -63,9 +63,9 @@
         else
         {
             $_SESSION["caricamento"] = "Errore nel caricamento";
-            $sql="DELETE FROM foto WHERE idAnnuncio='$idAnnuncio'";
+            $sql="DELETE FROM Foto WHERE idAnnuncio='$idAnnuncio'";
             $conn->query($sql);
-            $sql="DELETE FROM annuncio WHERE idAnnuncio='$idAnnuncio'";
+            $sql="DELETE FROM Annuncio WHERE idAnnuncio='$idAnnuncio'";
             $conn->query($sql);
             header("Location: ../front-end/insert_item.php");
         }

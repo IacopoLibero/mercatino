@@ -4,7 +4,7 @@
     include("../connessione.php");
     $id=$_SESSION['id'];
 
-    $target_dir = "../upload/";
+    $target_dir = "../img/";
     $target_file = $target_dir . $_FILES["imgprofilo"]["name"];
     $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -17,7 +17,7 @@
 
     // Check if the file name already exists in the database
     $existingFileName = $target_dir.$_FILES['imgprofilo']['name'];
-    $sql = "SELECT * FROM utente WHERE foto_profilo = '$existingFileName'";
+    $sql = "SELECT * FROM Utente WHERE foto_profilo = '$existingFileName'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -33,7 +33,7 @@
 
     if(move_uploaded_file($_FILES["imgprofilo"]["tmp_name"], $target_file))
     {
-        $sql = "UPDATE utente SET foto_profilo = '$target_file' WHERE id = '$id'";
+        $sql = "UPDATE Utente SET foto_profilo = '$target_file' WHERE id = '$id'";
         $result = $conn->query($sql);
         header("Location: ../front-end/profile.php");
     }

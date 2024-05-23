@@ -48,7 +48,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                     include ('../connessione.php');
                                     $id = $_SESSION['id'];
-                                    $query = "SELECT COUNT(*) as num FROM proposta WHERE proposta.idUtente='$id'";
+                                    $query = "SELECT COUNT(*) as num FROM Proposta WHERE Proposta.idUtente='$id'";
                                     $result = $conn->query($query);
                                     $row = $result->fetch_assoc();
                                     echo $row['num'];
@@ -66,7 +66,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                         include ('../connessione.php');
                                         $id = $_SESSION['id'];
-                                        $query = "SELECT COUNT(*) as num FROM proposta JOIN annuncio ON annuncio.id=proposta.idAnnuncio WHERE annuncio.idUtente='$id'";
+                                        $query = "SELECT COUNT(*) as num FROM Proposta JOIN annuncio ON annuncio.id=Proposta.idAnnuncio WHERE annuncio.idUtente='$id'";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];
@@ -116,7 +116,7 @@ if ($_SESSION['log'] == false) {
                 <input type="text" name="descrizione" aria-label="Large" class="form-control text-center">
                 <br>
                 <?php
-                    $query = "SELECT * FROM categoria";
+                    $query = "SELECT * FROM Categoria";
                     $result = $conn->query($query);
                     echo "<label class='form-label poetsen-one-regular' style='font-family: 48px'>Categoria</label>";
                     echo "<br>";

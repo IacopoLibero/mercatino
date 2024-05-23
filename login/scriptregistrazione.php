@@ -10,13 +10,13 @@
     $data_nascita = $_POST['data_nascita'];
     $password = hash("sha256",$_POST['pw']);
 
-    # Controllo se l'utente è già registrato
-    $checkQuery = "SELECT * FROM utente WHERE username = '$username'";
+    # Controllo se l'Utente è già registrato
+    $checkQuery = "SELECT * FROM Utente WHERE username = '$username'";
     $result = $conn->query($checkQuery);
     # Se non è registrato lo inserisco nel database, altrimenti mostro un errore
     if($result->num_rows == 0)
     {
-        $query = "INSERT INTO utente (username,password,nome,cognome,email,eta,classe) VALUES ('$username','$password','$nome', '$cognome', '$email','$data_nascita','$classe')";
+        $query = "INSERT INTO Utente (username,password,nome,cognome,email,eta,classe) VALUES ('$username','$password','$nome', '$cognome', '$email','$data_nascita','$classe')";
         if ($conn->query($query)) 
         {
             $_SESSION['status'] = "Registrazione effettuata";
