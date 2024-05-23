@@ -195,13 +195,13 @@ if ($_SESSION['log'] == false) {
             </div>
         </div>
     </div>
-    <h1>I tuoi articoli</h1>
+    <h1 >I tuoi articoli</h1>
     <section class="py-5">
         <div class="px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
                     $id = $_SESSION['id'];
-                    $query = "SELECT annuncio.id,annuncio.nome as nome ,categoria.nome as categoria,annuncio.descrizione FROM annuncio JOIN categoria ON annuncio.idCategoria=categoria.id WHERE idUtente='$id'";
+                    $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id WHERE Annuncio.idUtente='$id'";
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) 
                     {
@@ -209,7 +209,7 @@ if ($_SESSION['log'] == false) {
                         {
                             echo "<div class='col mb-5'>";
                                 echo "<div class='card' style='width: 18rem;'>";
-                                $foto="SELECT url_foto FROM foto WHERE idAnnuncio=" . $row['id'];
+                                $foto="SELECT url_foto FROM Foto WHERE idAnnuncio=" . $row['id'];
                                 $resultfoto = $conn->query($foto);
                                 if ($resultfoto->num_rows > 0) {
                                     $carouselId = 'carouselExampleControls' . $row['id'];
