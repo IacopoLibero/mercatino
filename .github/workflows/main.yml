@@ -11,8 +11,8 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp.rizzotti.altervista.org
+        server: ftp.bernabei5c1.altervista.org
         port: 21
         protocol: ftp
-        username: rizzotti
+        username: bernabei5c1
         password: ${{ secrets.ftp_password }}
