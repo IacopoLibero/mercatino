@@ -96,8 +96,11 @@ if ($_SESSION['log'] == false) {
             <div class="user text-center">
                 <div class="profile">
                     <?php
-                        
-                        echo "<img src='' class='rounded-circle' width='80' id='openModal'>";
+                        $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        $url = $row["foto_profilo"];
+                        echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
                     ?>
                 </div>
                 
@@ -110,7 +113,7 @@ if ($_SESSION['log'] == false) {
                                     $result = $conn->query($sql);
                                     $row = $result->fetch_assoc();
                                     $url = $row["foto_profilo"];
-                                    echo "<img src='$url' class='rounded-circle imgl' id='openModal'>";
+                                    echo "<img src='$url' class='rounded-circle imgl'>";
                                 ?>
                             </div>
                             <label for="file">Seleziona un'immagine da caricare</label>
