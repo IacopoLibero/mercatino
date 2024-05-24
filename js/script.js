@@ -19,6 +19,7 @@ closeBtnPrezzo.addEventListener("click",()=>{
     modal.classList.remove("open");
 });
 
+
 function preview() {
     var files = document.querySelector('input[type=file]').files;
     var images = document.getElementById('images');
@@ -39,7 +40,7 @@ function preview() {
 }
 
 /*
-function preview_carousel() {
+function preview_carousel() {.
     var files = document.getElementById('file-input').files;
     var carousel = document.getElementById('carouselExample');
     var carouselInner = carousel.getElementsByClassName('carousel-inner')[0];
