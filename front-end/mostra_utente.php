@@ -48,6 +48,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                     include ('../connessione.php');
                                     $id = $_SESSION['id'];
+                                    $utente_da_mostrare = $_SESSION['utente_da_mostrare'];
                                     $query="SELECT COUNT(*) as num FROM Proposta WHERE Proposta.idUtente='$id'";
                                     $result = $conn->query($query);
                                     $row = $result->fetch_assoc();
@@ -64,8 +65,6 @@ if ($_SESSION['log'] == false) {
                                 Proposte ricevute
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">
                                     <?php
-                                        include ('../connessione.php');
-                                        $id = $_SESSION['id'];
                                         $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
@@ -96,42 +95,27 @@ if ($_SESSION['log'] == false) {
             <div class="user text-center">
                 <div class="profile">
                     <?php
-                        $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
+                        $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $url = $row["foto_profilo"];
                         echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
                     ?>
                 </div>
-                
                 <div class="modal" id="modal">
                     <div class="modal-inner">
-                        <form method="POST" action="../back-end/img_profilo.php" enctype="multipart/form-data">
                             <div>
                                 <?php
-                                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
+                                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
                                     $result = $conn->query($sql);
                                     $row = $result->fetch_assoc();
                                     $url = $row["foto_profilo"];
                                     echo "<img src='$url' class='rounded-circle imgl'>";
                                 ?>
-                            </div>
-                            <label for="file">Seleziona un'immagine da caricare</label>
-                            <br><br>
-                            <div class="containera">
-                                <input type="file" name="imgprofilo" id="file-input" accept="image/*" onchange="preview()">
-                                <label for="file-input" class="labela">
-                                    <i class="fas fa-upload"></i> &nbsp; Choose A Photo
-                                </label>
-                                <p id="num-of-files">No Files Chosen</p>
-                                <div id="images"></div>
-                            </div>
-                            <br><br>
+                            </div>                            
                             <div>
                                 <button type="button" class="button" id="closeModal">CHIUDI</button>
-                                <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
                             </div>
-                        </form>
                     </div>
                 </div>
                 
@@ -139,9 +123,7 @@ if ($_SESSION['log'] == false) {
             <div class="mt-5 text-center">
                 <h4 class="mb-0">
                     <?php
-                
-                        $id = $_SESSION['id'];
-                        $query = "SELECT nome,cognome FROM Utente WHERE id='$id'";
+                        $query = "SELECT nome,cognome FROM Utente WHERE id='$utente_da_mostrare'";
                         $result = $conn->query($query);
                         $row = $result->fetch_assoc();
                         echo $row['nome'];
@@ -151,8 +133,7 @@ if ($_SESSION['log'] == false) {
                 </h4>
                 <span class="text-muted d-block mb-2">
                     <?php
-                        $id = $_SESSION['id'];
-                        $query = "SELECT classe FROM Utente WHERE id='$id'";
+                        $query = "SELECT classe FROM Utente WHERE id='$utente_da_mostrare'";
                         $result = $conn->query($query);
                         $row = $result->fetch_assoc();
                         echo "Classe: ".$row['classe']."  ";
@@ -164,7 +145,7 @@ if ($_SESSION['log'] == false) {
                             $eta = $differenza->y;
                             return $eta;
                         }
-                        $sql = "SELECT eta FROM Utente WHERE id = $id";
+                        $sql = "SELECT eta FROM Utente WHERE id = $utente_da_mostrare";
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $dataNascita = $row["eta"];
@@ -178,8 +159,7 @@ if ($_SESSION['log'] == false) {
                         <h6 class="mb-0">Annunci attivi</h6>
                         <span>
                             <?php
-                                $id = $_SESSION['id'];
-                                $query = "SELECT COUNT(*) as num FROM Annuncio WHERE idUtente='$id'";
+                                $query = "SELECT COUNT(*) as num FROM Annuncio WHERE idUtente='$utente_da_mostrare'";
                                 $result = $conn->query($query);
                                 $row = $result->fetch_assoc();
                                 echo $row['num'];
@@ -187,22 +167,17 @@ if ($_SESSION['log'] == false) {
                         </span>
                     </div>
                 </div>
-                <hr>
-                <div>
-                    <a href="../login/logout.php"><button class="my-2" style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">logout</button></a>
-                    <a href="../front-end/insert_item.php"><button class="my-2" id='openModalarticolo' style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">carica articolo</button></a>
-                </div>
             </div>
         </div>
     </div>
     <hr>
-    <div class="text-center articoli poetsen-one-regular"><h1 >I tuoi articoli</h1></div>
+    <div class="text-center articoli poetsen-one-regular"><h1 >Articoli caricati</h1></div>
     <section>
         <div class="px-4 px-lg-5 mt-5 ">
             <div class=" row justify-content-center">
                 <?php
                     $id = $_SESSION['id'];
-                    $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id WHERE Annuncio.idUtente='$id'";
+                    $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id WHERE Annuncio.idUtente='$utente_da_mostrare'";
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) 
                     {
@@ -249,7 +224,7 @@ if ($_SESSION['log'] == false) {
                                     echo "</div>";
                                 echo "</div>";
                                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                    echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../back-end/elimina_annuncio.php">Elimina</a></div>';
+                                    echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../back-end/send_proposta.php">Fai una proposta</a></div>';
                                 echo '</div>';
                             echo "</div>";
                         }

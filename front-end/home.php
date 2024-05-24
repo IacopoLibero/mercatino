@@ -85,18 +85,70 @@
             </div>
         </header>
         <!-- Section-->
-        <div class="card" style="width: 18rem;">
-        <img src="//path foto " class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        </div>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
+        <section>
+            <div class="px-4 px-lg-5 mt-5 ">
+                <div class=" row justify-content-center">
+                    <?php
+                        $id = $_SESSION['id'];
+                        $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione,Utente.email as mail,Utente.id as id_da_mostrare FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id JOIN Utente ON Annuncio.idUtente=Utente.id WHERE Annuncio.idUtente!='$id'";
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) 
+                        {
+                            while ($row = $result->fetch_assoc()) 
+                            {
+                                echo "<div class='card col-xxl-xl-3 col-lg-4 col-md-6 col-sm-12 mx-3 my-3' style='width: 18rem;'>";
+                                    echo "<div class='card-img-top'>";
+                                        $foto="SELECT url_foto FROM Foto WHERE idAnnuncio=" . $row['id'];
+                                        $resultfoto = $conn->query($foto);
+                                        if ($resultfoto->num_rows > 0) 
+                                        {
+                                            $carouselId = 'carouselExampleControls' . $row['id'];
+                                            echo "<div id='$carouselId' class='carousel carousel-dark slide' data-bs-ride='carousel'>";
+                                            echo "<div class='carousel-inner'>";
+                                            $first = true;
+                                            while ($rowfoto = $resultfoto->fetch_assoc()) 
+                                            {
+                                                if ($first) {
+                                                    echo "<div class='carousel-item active'>";
+                                                    $first = false;
+                                                } else {
+                                                    echo "<div class='carousel-item'>";
+                                                }
+                                                echo "<img class='d-block w-100' src='" . $rowfoto['url_foto'] . "' height='30%' width='30%'>'";
+                                                echo "</div>";
+                                            }
+                                            echo "</div>";
+                                            echo "<button class='carousel-control-prev' type='button' data-bs-target='#$carouselId' data-bs-slide='prev'>";
+                                            echo "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+                                            echo "<span class='visually-hidden'>Previous</span>";
+                                            echo "</button>";
+                                            echo "<button class='carousel-control-next' type='button' data-bs-target='#$carouselId' data-bs-slide='next'>";
+                                            echo "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+                                            echo "<span class='visually-hidden'>Next</span>";
+                                            echo "</button>";
+                                            echo "</div>";
+                                        }
+                                        $_SESSION['utente_da_mostrare']=$row['id_da_mostrare'];
+                                    echo "</div>";
+                                    echo "<div class='card-body p-4'>";
+                                        echo "<div class='text-center poetsen-one-regular'>";
+                                            echo "<h5 class='card-title '>" . $row['nome'] . "</h5>";
+                                            echo "<p class='card-text'>" . $row['categoria'] . "</p>";
+                                            echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
+                                            echo "<a href='mostra_utente.php' class='card-text'>" . $row['mail'] . "</a>";
+                                            
+                                        echo "</div>";
+                                    echo "</div>";
+                                    echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
+                                        echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../back-end/send_proposta.php">Fai una proposta</a></div>';
+                                    echo '</div>';
+                                echo "</div>";
+                            }
+                        }
+                    ?>
+                </div>
+            </div>
+        </section>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

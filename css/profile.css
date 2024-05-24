@@ -19,13 +19,11 @@ body {
 
 .card {
 
-       width: 380px;
        border: none;
        border-radius: 15px;
        padding: 8px;
        background-color: #fff;
        position: relative;
-       height: 420px;
 }
 
 .upper {
@@ -75,9 +73,6 @@ body {
        font-size: 29px;
 }
 
-* {
-       box-sizing: border-box;
-}
 
 .button {
        background-image: linear-gradient(to right, #663399, #8853bd);
@@ -118,9 +113,7 @@ body {
        background-color: #fff;
        border-radius: 5px;
        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-       padding: 15px 25px;
        text-align: center;
-       width: 380px;
 }
 
 .modal-inner label {
@@ -130,4 +123,7 @@ body {
 .imgl{
        width:150px;
        height:150px;
+}
+.articoli{
+       color: black;
 }
