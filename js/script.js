@@ -9,6 +9,16 @@ closeBtn.addEventListener("click",()=>{
     modal.classList.remove("open");
 });
 
+const openBtnPrezzo=document.getElementById("openModal-prezzo");
+const closeBtnPrezzo=document.getElementById("closeModal-prezzo");
+const modalPrezzo=document.getElementById("modal-offerta-prezzo");
+openBtnPrezzo.addEventListener("click",()=>{
+    modal.classList.add("open");
+});
+closeBtnPrezzo.addEventListener("click",()=>{
+    modal.classList.remove("open");
+});
+
 function preview() {
     var files = document.querySelector('input[type=file]').files;
     var images = document.getElementById('images');

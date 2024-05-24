@@ -140,7 +140,7 @@
                                         echo "</div>";
                                     echo "</div>";
                                     echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                        echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../back-end/send_proposta.php">Fai una proposta</a></div>';
+                                        echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo">Fai una proposta</button></div>';
                                     echo '</div>';
                                 echo "</div>";
                             }
@@ -149,9 +149,27 @@
                 </div>
             </div>
         </section>
+        <!--
+        <div class="modal" id="modal-offerta-prezzo">
+            <div class="modal-inner">
+                <form method="POST" action="../back-end/send_proposta.php">
+                    <div class="mt-3">
+                        <label for="prezzo">Inserisci il prezzo</label>
+                        <input type="number" name="prezzo" id="prezzo" required>
+
+                    </div>
+                    <br><br>
+                    <div class="mb-3">
+                        <button type="button" class="button" id="closeModal-prezzo">CHIUDI</button>
+                        <input type="submit" class="button" value="INVIA" name="submit" id="closeModal-prezzo">
+                    </div>
+                </form>
+            </div>
+        </div>
+            -->
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>

@@ -88,55 +88,47 @@ if ($_SESSION['log'] == false) {
     </nav>
     <br>
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="card col-12">
-            <div class="upper">
-                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+        <div class="card col-12 ">
+            <div class="text-center profile">
+                <?php
+                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    $url = $row["foto_profilo"];
+                    echo "<img src='$url' class=' rounded-circle imgg'   id='openModal'>";
+                ?>
             </div>
-
-            <div class="user text-center">
-                <div class="profile">
-                    <?php
-                        $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
-                        $result = $conn->query($sql);
-                        $row = $result->fetch_assoc();
-                        $url = $row["foto_profilo"];
-                        echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
-                    ?>
+            <div class="modal" id="modal">
+                <div class="modal-inner">
+                    <form method="POST" action="../back-end/img_profilo.php" enctype="multipart/form-data">
+                        <div class="mt-3">
+                            <?php
+                                $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                $url = $row["foto_profilo"];
+                                echo "<img src='$url' class='rounded-circle imgl'>";
+                            ?>
+                        </div>
+                        <label for="file">Seleziona un'immagine da caricare</label>
+                        <br><br>
+                        <div class="containera">
+                            <input type="file" name="imgprofilo" id="file-input" accept="image/*" onchange="preview()">
+                            <label for="file-input" class="labela">
+                                <i class="fas fa-upload"></i> &nbsp; Choose A Photo
+                            </label>
+                            <p id="num-of-files">No Files Chosen</p>
+                            <div id="images"></div>
+                        </div>
+                        <br><br>
+                        <div class="mb-3">
+                            <button type="button" class="button" id="closeModal">CHIUDI</button>
+                            <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="modal" id="modal">
-                    <div class="modal-inner">
-                        <form method="POST" action="../back-end/img_profilo.php" enctype="multipart/form-data">
-                            <div>
-                                <?php
-                                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
-                                    $result = $conn->query($sql);
-                                    $row = $result->fetch_assoc();
-                                    $url = $row["foto_profilo"];
-                                    echo "<img src='$url' class='rounded-circle imgl'>";
-                                ?>
-                            </div>
-                            <label for="file">Seleziona un'immagine da caricare</label>
-                            <br><br>
-                            <div class="containera">
-                                <input type="file" name="imgprofilo" id="file-input" accept="image/*" onchange="preview()">
-                                <label for="file-input" class="labela">
-                                    <i class="fas fa-upload"></i> &nbsp; Choose A Photo
-                                </label>
-                                <p id="num-of-files">No Files Chosen</p>
-                                <div id="images"></div>
-                            </div>
-                            <br><br>
-                            <div>
-                                <button type="button" class="button" id="closeModal">CHIUDI</button>
-                                <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                
             </div>
-            <div class="mt-5 text-center">
+            <div class="mt-2 text-center">
                 <h4 class="mb-0">
                     <?php
                 
@@ -198,7 +190,7 @@ if ($_SESSION['log'] == false) {
     <hr>
     <div class="text-center articoli poetsen-one-regular"><h1 >I tuoi articoli</h1></div>
     <section>
-        <div class="px-4 px-lg-5 mt-5 ">
+        <div class="px-4 px-lg-5 mt-2 ">
             <div class=" row justify-content-center">
                 <?php
                     $id = $_SESSION['id'];
@@ -208,7 +200,7 @@ if ($_SESSION['log'] == false) {
                     {
                         while ($row = $result->fetch_assoc()) 
                         {
-                            echo "<div class='card col-xxl-xl-3 col-lg-4 col-md-6 col-sm-12 mx-3 my-3' style='width: 18rem;'>";
+                            echo "<div class='card col-xxl-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mx-3 my-3' style='width: 18rem;'>";
                                 echo "<div class='card-img-top'>";
                                     $foto="SELECT url_foto FROM Foto WHERE idAnnuncio=" . $row['id'];
                                     $resultfoto = $conn->query($foto);
@@ -242,8 +234,8 @@ if ($_SESSION['log'] == false) {
                                     }
                                 echo "</div>";
                                 echo "<div class='card-body p-4'>";
-                                    echo "<div class='text-center poetsen-one-regular'>";
-                                        echo "<h5 class='card-title '>" . $row['nome'] . "</h5>";
+                                    echo "<div class='text-center'>";
+                                        echo "<h2 class='card-title '>" . $row['nome'] . "</h5>";
                                         echo "<p class='card-text'>" . $row['categoria'] . "</p>";
                                         echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                     echo "</div>";
