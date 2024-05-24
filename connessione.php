@@ -9,7 +9,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "mercatino";
+    $dbname = "mercatino";f
     */
 
     mysqli_report(MYSQLI_REPORT_OFF);  // Serve a disabilitare le eccezioni nelle nuove versioni di PHP
