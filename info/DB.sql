@@ -7,8 +7,7 @@ CREATE TABLE Utente (
 	password VARCHAR(64),
 	classe VARCHAR(2),
 	username VARCHAR(50),
-    foto_profilo VARCHAR(100) DEFAULT '../img/empty.png',
-	data_n DATETIME
+    foto_profilo VARCHAR(100) DEFAULT '../img/empty.png'
 );
 CREATE TABLE Categoria (
 	id INT PRIMARY KEY AUTO_INCREMENT,

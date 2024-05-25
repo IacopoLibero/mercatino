@@ -5,7 +5,7 @@
     
     if(isset($_POST['submit'])) 
     {
-        $target_dir = "../upload/";
+        $target_dir = "../img/";
         $descrizione=$_POST['descrizione'];
         $categotia=$_POST['categoria'];
         $nome=$_POST['nome'];

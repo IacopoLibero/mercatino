@@ -176,7 +176,15 @@ if ($_SESSION['log'] == false) {
                                 $row = $result->fetch_assoc();
                                 echo $row['num'];
                             ?>
-                        </span>
+                        </span><br>
+                        <span>
+                        <?php
+                            if(isset($_SESSION['status'])){
+                                echo $_SESSION['status'];
+                            }
+                            unset($_SESSION['status']);
+                        ?>    
+                    </span>
                     </div>
                 </div>
                 <hr>
@@ -203,6 +211,7 @@ if ($_SESSION['log'] == false) {
                             echo "<div class='card col-xxl-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mx-3 my-3' style='width: 18rem;'>";
                                 echo "<div class='card-img-top'>";
                                     $foto="SELECT url_foto FROM Foto WHERE idAnnuncio=" . $row['id'];
+                                    $_SESSION['idAnnuncio']= $row['id'];
                                     $resultfoto = $conn->query($foto);
                                     if ($resultfoto->num_rows > 0) 
                                     {
