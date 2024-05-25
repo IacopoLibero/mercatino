@@ -88,37 +88,14 @@ if ($_SESSION['log'] == false) {
     <br>
     <div class="row d-flex justify-content-center align-items-center">
         <div class="card col-12">
-            <div class="upper">
-                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
-            </div>
-
-            <div class="user text-center">
-                <div class="profile">
-                    <?php
-                        $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
-                        $result = $conn->query($sql);
-                        $row = $result->fetch_assoc();
-                        $url = $row["foto_profilo"];
-                        echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
-                    ?>
-                </div>
-                <div class="modal" id="modal">
-                    <div class="modal-inner">
-                            <div>
-                                <?php
-                                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
-                                    $result = $conn->query($sql);
-                                    $row = $result->fetch_assoc();
-                                    $url = $row["foto_profilo"];
-                                    echo "<img src='$url' class='rounded-circle imgl'>";
-                                ?>
-                            </div>                            
-                            <div>
-                                <button type="button" class="button" id="closeModal">CHIUDI</button>
-                            </div>
-                    </div>
-                </div>
-                
+            <div class="user text-center profile">
+                <?php
+                    $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    $url = $row["foto_profilo"];
+                    echo "<img src='$url' class='rounded-circle' width='80' id='openModal'>";
+                ?>
             </div>
             <div class="mt-5 text-center">
                 <h4 class="mb-0">

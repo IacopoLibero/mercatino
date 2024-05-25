@@ -26,6 +26,7 @@ if ($_SESSION['log'] == false) {
     <link href="../css/home.css" rel="stylesheet"/>
     <link href="../css/profile.css" rel="stylesheet">
     <link href="../css/insert.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/modal.css">
 </head>
 
 <body>

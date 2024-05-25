@@ -9,15 +9,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>home page</title>
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../css/home.css" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+
+        <link href="../css/home.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="../css/modal.css">
     </head>
     <body>
         <!-- Navigation-->
@@ -146,30 +153,28 @@
                             }
                         }
                     ?>
+                    <div class="modal" id="modal-offerta-prezzo">
+                        <div class="modal-inner">
+                            <form method="POST" action="../back-end/send_proposta.php">
+                                <div class="mt-3">
+                                    <label for="prezzo">Inserisci il prezzo</label>
+                                    <input type="number" name="prezzo" id="prezzo" required>
+
+                                </div>
+                                <br>
+                                <div class="mb-3 ">
+                                    <button type="button" class="button mx-3 my-3" id="closeModal-prezzo">CHIUDI</button>
+                                    <input type="submit" class="button mx-3 my-3" value="INVIA" name="submit" id="closeModal-prezzo">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <!--
-        <div class="modal" id="modal-offerta-prezzo">
-            <div class="modal-inner">
-                <form method="POST" action="../back-end/send_proposta.php">
-                    <div class="mt-3">
-                        <label for="prezzo">Inserisci il prezzo</label>
-                        <input type="number" name="prezzo" id="prezzo" required>
-
-                    </div>
-                    <br><br>
-                    <div class="mb-3">
-                        <button type="button" class="button" id="closeModal-prezzo">CHIUDI</button>
-                        <input type="submit" class="button" value="INVIA" name="submit" id="closeModal-prezzo">
-                    </div>
-                </form>
-            </div>
-        </div>
-            -->
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/script.js"></script>
+        <script src="../js/script_home.js"></script>
     </body>
 </html>

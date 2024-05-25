@@ -5,12 +5,12 @@
     $password = "";
     $dbname = "my_bernabei5c1";
 
-    /*
+    
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "mercatino";
-    */
+    
 
     mysqli_report(MYSQLI_REPORT_OFF);  // Serve a disabilitare le eccezioni nelle nuove versioni di PHP
 
