@@ -237,29 +237,17 @@ if ($_SESSION['log'] == false) {
                                         echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                     echo "</div>";
                                 echo "</div>";
-                                echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                    echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo1">Fai una proposta</button></div>';
+                                echo '<div class="card-footer p-4  pt-0 border-top-0 bg-transparent">';
+                                    echo "<form method='POST' class='row' action='../back-end/send_proposta.php'>";
+                                        echo "<input type='number' class=' col-xxl-xl-lg-md-sm-6' name='prezzo' id='prezzo'>";
+                                        echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                        echo "<input type='submit' class=' mx-3 col-xxl-xl-lg-md-sm-6 btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                    echo "</form>";
                                 echo '</div>';
                             echo "</div>";
                         }
                     }
                 ?>
-                <div class="modal" id="modal-offerta-prezzo1">
-                    <div class="modal-inner">
-                        <form method="POST" action="../back-end/send_proposta.php">
-                            <div class="mt-3">
-                                <label for="prezzo">Inserisci il prezzo</label>
-                                <br>
-                                <input type="number" name="prezzo" id="prezzo" required>
-                            </div>
-                            <br>
-                            <div class="mb-3 row">
-                                <button type="button" class="button mx-3 my-3 col-6" id="closeModal-prezzo1">CHIUDI</button>
-                                <input type="submit" class="button mx-3 my-3 col-6" value="INVIA" name="submit" id="closeModal-prezzo1">
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
