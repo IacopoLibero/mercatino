@@ -183,8 +183,12 @@
                                             echo "<a href='mostra_utente.php' class='card-text'>" . $row['mail'] . "</a>";
                                         echo "</div>";
                                     echo "</div>";
-                                    echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                        echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo">Fai una proposta</button></div>';
+                                    echo '<div class="card-footer p-4  pt-0 border-top-0 bg-transparent">';
+                                        echo "<form method='POST' class='row' action='../back-end/send_proposta.php'>";
+                                            echo "<input type='number' class=' col-xxl-xl-lg-md-sm-6' name='prezzo' id='prezzo'>";
+                                            echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                            echo "<input type='submit' class=' mx-3 col-xxl-xl-lg-md-sm-6 btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                        echo "</form>";
                                     echo '</div>';
                                 echo "</div>";
                             }
