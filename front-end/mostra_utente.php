@@ -87,7 +87,7 @@ if ($_SESSION['log'] == false) {
     </nav>
     <br>
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="card col-12">
+        <div class="card col-12 w-50">
             <div class="user text-center profile">
                 <?php
                     $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
@@ -238,26 +238,26 @@ if ($_SESSION['log'] == false) {
                                     echo "</div>";
                                 echo "</div>";
                                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                    echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo1">Fai una proposta</button></div>';
+                                    echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo">Fai una proposta</button></div>';
                                 echo '</div>';
                             echo "</div>";
                         }
                     }
                 ?>
-                <div class="modal" id="modal-offerta-prezzo1">
-                    <div class="modal-inner">
-                        <form method="POST" action="../back-end/send_proposta.php">
-                            <div class="mt-3">
-                                <label for="prezzo">Inserisci il prezzo</label>
-                                <br>
-                                <input type="number" name="prezzo" id="prezzo" required>
-                            </div>
-                            <br>
-                            <div class="mb-3 row">
-                                <button type="button" class="button mx-3 my-3 col-6" id="closeModal-prezzo1">CHIUDI</button>
-                                <input type="submit" class="button mx-3 my-3 col-6" value="INVIA" name="submit" id="closeModal-prezzo1">
-                            </div>
-                        </form>
+                <div class="modal" id="modal-offerta-prezzo">
+                        <div class="modal-inner">
+                            <form method="POST" action="../back-end/send_proposta.php">
+                                <div class="mt-3 form-group">
+                                    <label for="prezzo" class="form-label">Inserisci il prezzo</label>
+                                    <input type="number" name="prezzo" id="prezzo" class="form-control" required>
+                                </div>
+                                <div class="mt-4 d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" id="closeModal-prezzo">CHIUDI</button>
+                                    <input type="submit" class="btn btn-primary" value="INVIA" name="submit">
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>

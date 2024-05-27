@@ -193,18 +193,17 @@
                     <div class="modal" id="modal-offerta-prezzo">
                         <div class="modal-inner">
                             <form method="POST" action="../back-end/send_proposta.php">
-                                <div class="mt-3">
-                                    <label for="prezzo">Inserisci il prezzo</label>
-                                    <br>
-                                    <input type="number" name="prezzo" id="prezzo" required>
+                                <div class="mt-3 form-group">
+                                    <label for="prezzo" class="form-label">Inserisci il prezzo</label>
+                                    <input type="number" name="prezzo" id="prezzo" class="form-control" required>
                                 </div>
-                                <br>
-                                <div class="mb-3 row">
-                                    <button type="button" class="button mx-3 my-3 col-xxl-xl--lg-md-6 col-sm-12" id="closeModal-prezzo">CHIUDI</button>
-                                    <input type="submit" class="button mx-3 my-3 col-xxl-xl--lg-md-6 col-sm-12" value="INVIA" name="submit" id="closeModal-prezzo">
+                                <div class="mt-4 d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" id="closeModal-prezzo">CHIUDI</button>
+                                    <input type="submit" class="btn btn-primary" value="INVIA" name="submit">
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>

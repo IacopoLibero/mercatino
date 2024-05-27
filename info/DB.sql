@@ -13,10 +13,7 @@ CREATE TABLE Categoria (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50)
 );
-CREATE TABLE Foto(
-	url_foto VARCHAR(100) PRIMARY KEY,
-	idAnnuncio INT
-);
+
 CREATE TABLE Annuncio (
     id INT PRIMARY KEY AUTO_INCREMENT,
     idUtente INT,
@@ -26,6 +23,11 @@ CREATE TABLE Annuncio (
     descrizione VARCHAR(150),
     FOREIGN KEY (idUtente) REFERENCES Utente(id) ON DELETE CASCADE,
     FOREIGN KEY (idCategoria) REFERENCES Categoria(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Foto(
+	url_foto VARCHAR(100) PRIMARY KEY,
+	idAnnuncio INT,
+    FOREIGN KEY (idAnnuncio) REFERENCES Annuncio(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Proposta (
