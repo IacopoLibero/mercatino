@@ -121,10 +121,9 @@ if ($_SESSION['log'] == false) {
                             <p id="num-of-files">No Files Chosen</p>
                             <div id="images"></div>
                         </div>
-                        <br><br>
                         <div class="mb-3">
-                            <button type="button" class="button" id="closeModal">CHIUDI</button>
-                            <input type="submit" class="button" value="INVIA" name="submit" id="closeModal">
+                            <button type="button" class="button mx-3 my-3 col-xxl-xl--lg-md-6 col-sm-12" id="closeModal">CHIUDI</button>
+                            <input type="submit" class="button  mx-3 my-3 col-xxl-xl--lg-md-6 col-sm-12" value="INVIA" name="submit" id="closeModal">
                         </div>
                     </form>
                 </div>

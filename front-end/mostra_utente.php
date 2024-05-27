@@ -25,7 +25,7 @@ if ($_SESSION['log'] == false) {
 
     <link href="../css/home.css" rel="stylesheet"/>
     <link href="../css/profile.css" rel="stylesheet">
-    <link href="../css/insert.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/modal.css">
 </head>
 
 <body>
@@ -149,12 +149,49 @@ if ($_SESSION['log'] == false) {
     </div>
     <hr>
     <div class="text-center articoli poetsen-one-regular"><h1 >Articoli caricati</h1></div>
+    <?php
+        $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
+    ?>
+    <div class="radio-inputs row text-center">
+        <label class="radio col-12">
+            <input type="radio" name="radio" value="all" <?php echo ($selected_radio == 'all') ? 'checked' : '' ?>>
+            <span class="name">TUTTE LE CATEGORIE</span>
+            </label>
+            <label class="radio col-6">
+            <input type="radio" name="radio" value="inf" <?php echo ($selected_radio == 'inf') ? 'checked' : '' ?>>
+            <span class="name">INFORMATICA</span>
+            </label>
+            <label class="radio col-6">
+            <input type="radio" name="radio" value="vid" <?php echo ($selected_radio == 'vid') ? 'checked' : '' ?>>
+            <span class="name">VIDEOGIOCHI</span>
+            </label>
+            <label class="radio col-6">
+            <input type="radio" name="radio" value="lib" <?php echo ($selected_radio == 'lib') ? 'checked' : '' ?>>
+            <span class="name">LIBRI</span>
+            </label>
+            <label class="radio col-6">
+            <input type="radio" name="radio" value="tel" <?php echo ($selected_radio == 'tel') ? 'checked' : '' ?>>
+            <span class="name">TELEFONIA</span>
+        </label>
+    </div>
     <section>
         <div class="px-4 px-lg-5 mt-5 ">
             <div class=" row justify-content-center">
                 <?php
+                    $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
+
                     $id = $_SESSION['id'];
                     $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id WHERE Annuncio.idUtente='$utente_da_mostrare'";
+                    if ($selected_radio == 'inf') {
+                        $query .= " AND Categoria.nome='informatica'";
+                    } elseif ($selected_radio == 'vid') {
+                        $query .= " AND Categoria.nome='videogiochi'";
+                    } elseif ($selected_radio == 'lib') {
+                        $query .= " AND Categoria.nome='libri'";
+                    } elseif ($selected_radio == 'tel') {
+                        $query .= " AND Categoria.nome='telefonia'";
+                    }
+                    $id = $_SESSION['id'];
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) 
                     {
@@ -201,18 +238,56 @@ if ($_SESSION['log'] == false) {
                                     echo "</div>";
                                 echo "</div>";
                                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                    echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../back-end/send_proposta.php">Fai una proposta</a></div>';
+                                    echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo1">Fai una proposta</button></div>';
                                 echo '</div>';
                             echo "</div>";
                         }
                     }
                 ?>
+                <div class="modal" id="modal-offerta-prezzo1">
+                    <div class="modal-inner">
+                        <form method="POST" action="../back-end/send_proposta.php">
+                            <div class="mt-3">
+                                <label for="prezzo">Inserisci il prezzo</label>
+                                <br>
+                                <input type="number" name="prezzo" id="prezzo" required>
+                            </div>
+                            <br>
+                            <div class="mb-3 row">
+                                <button type="button" class="button mx-3 my-3 col-6" id="closeModal-prezzo1">CHIUDI</button>
+                                <input type="submit" class="button mx-3 my-3 col-6" value="INVIA" name="submit" id="closeModal-prezzo1">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/script.js"></script>
+    <script src="../js/script_home.js"></script>
 </body>
 </html>
+<script>
+window.onload = function() {
+    var radios = document.getElementsByName('radio');
+
+    for(var i = 0; i < radios.length; i++) {
+        radios[i].addEventListener('change', function() {
+            var form = document.createElement('form');
+            form.setAttribute('method', 'post');
+            form.setAttribute('action', 'mostra_utente.php');
+
+            var hiddenField = document.createElement('input');
+            hiddenField.setAttribute('type', 'hidden');
+            hiddenField.setAttribute('name', 'radio');
+            hiddenField.setAttribute('value', this.value);
+
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        });
+    }
+}
+</script>    

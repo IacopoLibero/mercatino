@@ -86,18 +86,56 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Shop in style</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Discover amazing deals</p>
+                    <h1 class="display-4 fw-bolder">Acquista in sicurezza al Meucci</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">accordati con il cliente o venditore sul luogo dello scambio e sul prezzo</p>
                 </div>
             </div>
         </header>
+
+        <?php
+            $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
+        ?>
+        <div class="radio-inputs row text-center">
+            <label class="radio col-12">
+                <input type="radio" name="radio" value="all" <?php echo ($selected_radio == 'all') ? 'checked' : '' ?>>
+                <span class="name">TUTTE LE CATEGORIE</span>
+                </label>
+                <label class="radio col-6">
+                <input type="radio" name="radio" value="inf" <?php echo ($selected_radio == 'inf') ? 'checked' : '' ?>>
+                <span class="name">INFORMATICA</span>
+                </label>
+                <label class="radio col-6">
+                <input type="radio" name="radio" value="vid" <?php echo ($selected_radio == 'vid') ? 'checked' : '' ?>>
+                <span class="name">VIDEOGIOCHI</span>
+                </label>
+                <label class="radio col-6">
+                <input type="radio" name="radio" value="lib" <?php echo ($selected_radio == 'lib') ? 'checked' : '' ?>>
+                <span class="name">LIBRI</span>
+                </label>
+                <label class="radio col-6">
+                <input type="radio" name="radio" value="tel" <?php echo ($selected_radio == 'tel') ? 'checked' : '' ?>>
+                <span class="name">TELEFONIA</span>
+            </label>
+        </div>
+
         <!-- Section-->
         <section>
             <div class="px-4 px-lg-5 mt-5 ">
                 <div class=" row justify-content-center">
                     <?php
+                        $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
+
                         $id = $_SESSION['id'];
-                        $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione,Utente.email as mail,Utente.id as id_da_mostrare FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id JOIN Utente ON Annuncio.idUtente=Utente.id WHERE Annuncio.idUtente!='$id'";
+                        $query = "SELECT Annuncio.id ,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione,Utente.email as mail,Utente.id as id_da_mostrare FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id JOIN Utente ON Annuncio.idUtente=Utente.id WHERE Annuncio.idUtente!='$id'";
+                        if ($selected_radio == 'inf') {
+                            $query .= " AND Categoria.nome='informatica'";
+                        } elseif ($selected_radio == 'vid') {
+                            $query .= " AND Categoria.nome='videogiochi'";
+                        } elseif ($selected_radio == 'lib') {
+                            $query .= " AND Categoria.nome='libri'";
+                        } elseif ($selected_radio == 'tel') {
+                            $query .= " AND Categoria.nome='telefonia'";
+                        }
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) 
                         {
@@ -143,7 +181,6 @@
                                             echo "<p class='card-text'>" . $row['categoria'] . "</p>";
                                             echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                             echo "<a href='mostra_utente.php' class='card-text'>" . $row['mail'] . "</a>";
-                                            
                                         echo "</div>";
                                     echo "</div>";
                                     echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
@@ -158,13 +195,13 @@
                             <form method="POST" action="../back-end/send_proposta.php">
                                 <div class="mt-3">
                                     <label for="prezzo">Inserisci il prezzo</label>
+                                    <br>
                                     <input type="number" name="prezzo" id="prezzo" required>
-
                                 </div>
                                 <br>
-                                <div class="mb-3 ">
-                                    <button type="button" class="button mx-3 my-3" id="closeModal-prezzo">CHIUDI</button>
-                                    <input type="submit" class="button mx-3 my-3" value="INVIA" name="submit" id="closeModal-prezzo">
+                                <div class="mb-3 row">
+                                    <button type="button" class="button mx-3 my-3 col-xxl-xl--lg-md-6 col-sm-12" id="closeModal-prezzo">CHIUDI</button>
+                                    <input type="submit" class="button mx-3 my-3 col-xxl-xl--lg-md-6 col-sm-12" value="INVIA" name="submit" id="closeModal-prezzo">
                                 </div>
                             </form>
                         </div>
@@ -178,3 +215,26 @@
         <script src="../js/script_home.js"></script>
     </body>
 </html>
+
+<script>
+window.onload = function() {
+    var radios = document.getElementsByName('radio');
+
+    for(var i = 0; i < radios.length; i++) {
+        radios[i].addEventListener('change', function() {
+            var form = document.createElement('form');
+            form.setAttribute('method', 'post');
+            form.setAttribute('action', 'home.php');
+
+            var hiddenField = document.createElement('input');
+            hiddenField.setAttribute('type', 'hidden');
+            hiddenField.setAttribute('name', 'radio');
+            hiddenField.setAttribute('value', this.value);
+
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        });
+    }
+}
+</script>

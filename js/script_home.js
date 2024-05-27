@@ -7,3 +7,14 @@ openBtnPrezzo.addEventListener("click",()=>{
 closeBtnPrezzo.addEventListener("click",()=>{
     modalPrezzo.classList.remove("open");
 });
+
+
+const openBtnPrezzo1=document.getElementById("openModal-prezzo1");
+const closeBtnPrezzo1=document.getElementById("closeModal-prezzo1");
+const modalPrezzo1=document.getElementById("modal-offerta-prezzo1");
+openBtnPrezzo1.addEventListener("click",()=>{
+    modalPrezzo1.classList.add("open");
+});
+closeBtnPrezzo1.addEventListener("click",()=>{
+    modalPrezzo1.classList.remove("open");
+});
