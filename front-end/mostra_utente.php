@@ -65,7 +65,7 @@ if ($_SESSION['log'] == false) {
                                 Proposte ricevute
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">
                                     <?php
-                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
+                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' ";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];

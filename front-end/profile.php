@@ -67,7 +67,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                         include ('../connessione.php');
                                         $id = $_SESSION['id'];
-                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
+                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' ";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];
@@ -249,8 +249,11 @@ if ($_SESSION['log'] == false) {
                                         echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                     echo "</div>";
                                 echo "</div>";
-                                echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                    echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../back-end/elimina_annuncio.php">Elimina</a></div>';
+                                echo '<div class="card-footer text-center p-4 pt-0 border-top-0 bg-transparent">';
+                                    echo "<form method='POST'  action='../back-end/elimina_annuncio.php'>";
+                                        echo "<input type='submit' class='btn btn-outline-dark mt-auto' value='Elimina' >";
+                                        echo "<input type='hidden' name='idAnnuncio' value='" . $row['id'] . "'>";
+                                    echo "</form>";
                                 echo '</div>';
                             echo "</div>";
                         }

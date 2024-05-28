@@ -13,6 +13,6 @@
         $sql="DELETE FROM Proposta WHERE id='$id_prp'";
         $conn->query($sql);
         
-        header("Location: ../front-end/recived.php");
+        header("Location: ../front-end/sendeed.php");
     }
 ?>

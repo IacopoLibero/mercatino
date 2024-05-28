@@ -16,6 +16,6 @@
         $sql="DELETE Annuncio WHERE id='$id_ann'";
         $conn->query($sql);
         
-        header("Location: ../front-end/recived.php");
+        header("Location: ../front-end/sendeed.php");
     }
 ?>

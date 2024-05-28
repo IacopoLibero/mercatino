@@ -62,7 +62,7 @@
                                         <?php
                                             include('../connessione.php');
                                             $id=$_SESSION['id'];
-                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
+                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
                                             $result=$conn->query($query);
                                             $row=$result->fetch_assoc();
                                             echo $row['num'];
@@ -187,17 +187,21 @@
                                         echo "</div>";
                                     echo "</div>";
                                     echo '<div class="card-footer  p-4  pt-0 border-top-0 bg-transparent">';
-                                        echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
-                                            echo "<input type='number' name='prezzo' id='prezzo'>";
-                                            echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
-                                            echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
-                                        echo "</form>";
                                         $offerta = "SELECT prezzo FROM Proposta WHERE idAnnuncio=" . $row['id'] . " AND idUtente=" . $_SESSION['id'];
                                         $resultOfferta = $conn->query($offerta);
-                                        if ($resultOfferta->num_rows > 0) {
+                                        if ($resultOfferta->num_rows > 0) 
+                                        {
                                             $rowOfferta = $resultOfferta->fetch_assoc();
                                             echo "<br>";
-                                            echo "<p class='card-text text-danger'>Hai già fatto un'offerta di " . $rowOfferta['prezzo'] . "€</p>";
+                                            echo "<p class='card-text  text-danger text-center'>Hai già fatto un'offerta di " . $rowOfferta['prezzo'] . "€</p>";
+                                        }
+                                        else
+                                        {
+                                            echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
+                                                echo "<input type='number' name='prezzo' id='prezzo'>";
+                                                echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                                echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                            echo "</form>";
                                         }
                                     echo '</div>';
                                     
