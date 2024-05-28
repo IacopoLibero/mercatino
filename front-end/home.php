@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-2 px-lg-5">
                 <img src="../img/logo.png" class="me-4" height="7%" width="7%">
-                <a class="navbar-brand" href="#!">Mercatino Meucci</a>
+                <a class="navbar-brand" href="home.php">Mercatino Meucci</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -62,7 +62,7 @@
                                         <?php
                                             include('../connessione.php');
                                             $id=$_SESSION['id'];
-                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
+                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                                             $result=$conn->query($query);
                                             $row=$result->fetch_assoc();
                                             echo $row['num'];
@@ -126,7 +126,7 @@
                         $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
 
                         $id = $_SESSION['id'];
-                        $query = "SELECT Annuncio.id ,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione,Utente.email as mail,Utente.id as id_da_mostrare FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id JOIN Utente ON Annuncio.idUtente=Utente.id WHERE Annuncio.idUtente!='$id'";
+                        $query = "SELECT Annuncio.id ,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione,Utente.email as mail,Utente.id as id_da_mostrare FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id JOIN Utente ON Annuncio.idUtente=Utente.id WHERE Annuncio.idUtente!='$id' ";
                         if ($selected_radio == 'inf') {
                             $query .= " AND Categoria.nome='informatica'";
                         } elseif ($selected_radio == 'vid') {
@@ -186,13 +186,21 @@
                                             echo "</form>";
                                         echo "</div>";
                                     echo "</div>";
-                                        echo '<div class="card-footer  p-4  pt-0 border-top-0 bg-transparent">';
-                                            echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
-                                                echo "<input type='number' name='prezzo' id='prezzo'>";
-                                                echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
-                                                echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
-                                            echo "</form>";
-                                        echo '</div>';
+                                    echo '<div class="card-footer  p-4  pt-0 border-top-0 bg-transparent">';
+                                        echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
+                                            echo "<input type='number' name='prezzo' id='prezzo'>";
+                                            echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                            echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                        echo "</form>";
+                                        $offerta = "SELECT prezzo FROM Proposta WHERE idAnnuncio=" . $row['id'] . " AND idUtente=" . $_SESSION['id'];
+                                        $resultOfferta = $conn->query($offerta);
+                                        if ($resultOfferta->num_rows > 0) {
+                                            $rowOfferta = $resultOfferta->fetch_assoc();
+                                            echo "<br>";
+                                            echo "<p class='card-text text-danger'>Hai già fatto un'offerta di " . $rowOfferta['prezzo'] . "€</p>";
+                                        }
+                                    echo '</div>';
+                                    
                                 echo "</div>";
                             }
                         }

@@ -65,7 +65,7 @@ if ($_SESSION['log'] == false) {
                                 Proposte ricevute
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">
                                     <?php
-                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
+                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];
@@ -237,11 +237,11 @@ if ($_SESSION['log'] == false) {
                                         echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                     echo "</div>";
                                 echo "</div>";
-                                echo '<div class="card-footer p-4  pt-0 border-top-0 bg-transparent">';
-                                    echo "<form method='POST' class='row' action='../back-end/send_proposta.php'>";
-                                        echo "<input type='number' class=' col-xxl-xl-lg-md-sm-6' name='prezzo' id='prezzo'>";
+                                echo '<div class="card-footer  p-4  pt-0 border-top-0 bg-transparent">';
+                                    echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
+                                        echo "<input type='number' name='prezzo' id='prezzo'>";
+                                        echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
                                         echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
-                                        echo "<input type='submit' class=' mx-3 col-xxl-xl-lg-md-sm-6 btn btn-outline-dark mt-auto' value='Invia la proposta' >";
                                     echo "</form>";
                                 echo '</div>';
                             echo "</div>";

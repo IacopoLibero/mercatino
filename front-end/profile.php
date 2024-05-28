@@ -67,7 +67,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                         include ('../connessione.php');
                                         $id = $_SESSION['id'];
-                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
+                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];
@@ -188,9 +188,9 @@ if ($_SESSION['log'] == false) {
                     </div>
                 </div>
                 <hr>
-                <div>
-                    <a href="../login/logout.php"><button class="my-2" style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">logout</button></a>
-                    <a href="../front-end/insert_item.php"><button class="my-2" id='openModalarticolo' style="background-color: blue;border-radius: 20px;color: #fff;cursor: pointer;padding: 10px 25px;">carica articolo</button></a>
+                <div class="row">
+                    <a href="../login/logout.php"><button class="col-6 my-2 mx-2 btn btn-outline-dark mt-auto" >logout</button></a>
+                    <a href="../front-end/insert_item.php"><button class="col-6 my-2 mx-2 btn btn-outline-dark mt-auto" id='openModalarticolo' >carica articolo</button></a>
                 </div>
             </div>
         </div>

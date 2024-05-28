@@ -10,7 +10,10 @@
         include('../connessione.php');
         $id = $_SESSION['id'];
         $id_prp=$_POST['idproposta'];
-        $sql="UPDATE Proposta SET stato='r' WHERE id='$id_prp'";
+        $id_ann=$_POST['idAnnuncio'];
+        $sql="DELETE FROM Proposta WHERE id='$id_prp'";
+        $conn->query($sql);
+        $sql="DELETE Annuncio WHERE id='$id_ann'";
         $conn->query($sql);
         
         header("Location: ../front-end/recived.php");

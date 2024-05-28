@@ -62,7 +62,7 @@
                                         <?php
                                             include('../connessione.php');
                                             $id=$_SESSION['id'];
-                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
+                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                                             $result=$conn->query($query);
                                             $row=$result->fetch_assoc();
                                             echo $row['num'];
@@ -89,7 +89,7 @@
                         
 
                         $id = $_SESSION['id'];
-                        $query = "SELECT Annuncio.id ,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione,Utente.email as mail,Utente.id as id_da_mostrare FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id JOIN Utente ON Annuncio.idUtente=Utente.id WHERE Annuncio.idUtente!='$id'";
+                        $query = "SELECT Proposta.prezzo as prezzo,Proposta.id as idproposta,Proposta.idUtente as idutente, Proposta.data_pubblicazione as dataP,Annuncio.nome as nome,Proposta.stato as stato,Annuncio.id as idannuncio,Utente.email as mail FROM Proposta JOIN Annuncio ON Proposta.idAnnuncio=Annuncio.id JOIN Utente ON Proposta.idUtente=Utente.id WHERE  Proposta.idUtente='$id'";
                         
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) 
@@ -100,13 +100,42 @@
                                     echo "<div class='card-body p-4'>";
                                         echo "<div class='text-center poetsen-one-regular'>";
                                             echo "<h5 class='card-title '>" . $row['nome'] . "</h5>";
-                                            echo "<p class='card-text'>" . $row['categoria'] . "</p>";
-                                            echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
-                                            echo "<a href='mostra_utente.php' class='card-text'>" . $row['mail'] . "</a>";
+                                            echo "<p class='card-text'>" . $row['prezzo'] . "€"."</p>";
+                                            echo "<p class='card-text'>" . $row['dataP'] . "</p>";
+                                            echo "<form method='POST'  action='mostra_utente.php'>";
+                                                echo "<input type='submit' class='card-text' value=". $row['mail']." >";
+                                                echo "<input type='hidden' name='utente_da_mostrare' value='" . $row['idutente'] . "'>";
+                                            echo "</form>";
+                                            if($row['stato']=='r')
+                                            {
+                                                echo "<p class='card-text'>Proposta rifiutata</p>";
+                                                echo "<form method='POST' class='mt-3 text-center'  action='../back-end/elimina_proposta.php'>";
+                                                    echo "<input type='submit' class='btn btn-danger mx-2' value='Elimina' >";
+                                                    echo "<input type='hidden' name='idproposta' value='" . $row['idproposta'] . "'>";
+                                                echo "</form>";
+                                            }
+                                            else if($row['stato']=='a')
+                                            {
+                                                echo "<p class='card-text'>Proposta accettata</p>";
+                                                echo "<form method='POST' class='mt-3 text-center'  action='../back-end/elimina_proposta_annuncio.php'>";
+                                                    echo "<input type='submit' class='btn btn-success mx-2' value='Fine' >";
+                                                    echo "<input type='hidden' name='idproposta' value='" . $row['idproposta'] . "'>";
+                                                    echo "<input type='hidden' name='idAnnuncio' value='" . $row['idannuncio'] . "'>";
+                                                echo "</form>";
+                                            }
+                                            else
+                                            {
+                                                echo "<p class='card-text'>Proposta non visionata</p>";
+                                            }
+                                            
                                         echo "</div>";
                                     echo "</div>";
                                 echo "</div>";
                             }
+                        }
+                        else
+                        {
+                            echo "<h1 class='text-center'>Non hai inviato nessuna proposta</h1>";
                         }
                     ?>
                 </div>

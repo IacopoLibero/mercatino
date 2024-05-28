@@ -34,8 +34,10 @@ CREATE TABLE Proposta (
     data_pubblicazione DATETIME,
     idAnnuncio INT,
     idUtente INT,
+    stato VARCHAR(1) default null,
     FOREIGN KEY (idAnnuncio) REFERENCES Annuncio(id) ON DELETE CASCADE,
     FOREIGN KEY (idUtente) REFERENCES Utente(id) ON DELETE CASCADE,
+
     UNIQUE (idAnnuncio,idUtente)
 );
 ALTER TABLE Annuncio

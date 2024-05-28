@@ -64,7 +64,7 @@
                                         <?php
                                             include('../connessione.php');
                                             $id=$_SESSION['id'];
-                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
+                                            $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                                             $result=$conn->query($query);
                                             $row=$result->fetch_assoc();
                                             echo $row['num'];
@@ -91,7 +91,7 @@
                         
 
                         $id = $_SESSION['id'];
-                        $query = "SELECT Proposta.prezzo as prezzo, Proposta.data_pubblicazione as dataP,Annuncio.nome as nome,Annuncio.id as idannuncio,Utente.email as mail, Utente.id as idutente FROM Proposta JOIN Annuncio ON Proposta.idAnnuncio=Annuncio.id JOIN Utente ON Proposta.idUtente=Utente.id WHERE Annuncio.idUtente='$id'";
+                        $query = "SELECT Proposta.prezzo as prezzo,Proposta.id as idproposta, Proposta.data_pubblicazione as dataP,Annuncio.nome as nome,Annuncio.id as idannuncio,Utente.email as mail, Utente.id as idutente FROM Proposta JOIN Annuncio ON Proposta.idAnnuncio=Annuncio.id JOIN Utente ON Proposta.idUtente=Utente.id WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                         
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) 
@@ -111,16 +111,21 @@
                                             echo "<div class='mt-3 text-center' style='display:flex'>";
                                                 echo "<form method='POST'  action='../back-end/rifiuta_proposta.php'>";
                                                     echo "<input type='submit' class='btn btn-danger mx-2' value='Rifiuta' >";
-                                                    echo "<input type='hidden' name='idAnnuncio' value='" . $row['idannuncio'] . "'>";
+                                                    echo "<input type='hidden' name='idproposta' value='" . $row['idproposta'] . "'>";
                                                 echo "</form>";
                                                 echo "<form method='POST'  action='../back-end/accetta_proposta.php'>";
                                                     echo "<input type='submit' class='btn btn-success mx-2' value='Accetta' >";
                                                     echo "<input type='hidden' name='idAnnuncio' value='" . $row['idannuncio'] . "'>";
+                                                    echo "<input type='hidden' name='idproposta' value='" . $row['idproposta'] . "'>";
                                                 echo "</form>";
                                         echo "</div>";
                                     echo "</div>";
                                 echo "</div>";
                             }
+                        }
+                        else
+                        {
+                            echo "<h1 class='text-center'>Non hai ricevuto nessuna proposta</h1>";
                         }
                     ?>
                 </div>

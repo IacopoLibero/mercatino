@@ -65,7 +65,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                         include ('../connessione.php');
                                         $id = $_SESSION['id'];
-                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id'";
+                                        $query="SELECT COUNT(*) as num FROM Proposta JOIN Annuncio ON Annuncio.id=Proposta.idAnnuncio WHERE Annuncio.idUtente='$id' AND Proposta.stato=null";
                                         $result = $conn->query($query);
                                         $row = $result->fetch_assoc();
                                         echo $row['num'];
@@ -94,27 +94,14 @@ if ($_SESSION['log'] == false) {
             <form method="POST" action="../back-end/upload.php" enctype="multipart/form-data">
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Seleziona una o piu immagini per il tuo annuncio (max 10)</label>
                 <div class="containera">
-                    <input type="file" name="img_articolo[]" id="file-input" accept="image/*" onchange="preview()" multiple>
+                    <input type="file" name="img_articolo[]" id="file-input" accept="image/*" onchange="preview()" multiple required>
                     <label for="file-input" class="labela">
                         <i class="fas fa-upload"></i> &nbsp; Choose A Photo
                     </label>
-                    <p id="num-of-files">No Files Chosen</p>
+                    <p id="num-of-files">Nessuna foto scelta</p>
                     <div id="images"></div>
-                    <!--<div id="carouselExample" class="carousel slide">
-                        <div class="carousel-inner">
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>-->
+                    
                 </div>
-                
-                
                 <br>
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Nome articolo</label>
                 <input type="text" name="nome" aria-label="Large" class="form-control text-center">
