@@ -10,16 +10,24 @@ echo $id;
 var_dump($idUtente);
 var_dump($idA);
 
-$sql = "DELETE FROM Annuncio WHERE id = $idA AND idUtente = $idUtente";
 
-if ($conn->query($sql) === TRUE) {
-    $_SESSION['elimina'] = "Eliminazione andata a buon fine";
-} else {
-    $_SESSION['elimina'] = "Errore durante l'eliminazione dell'annuncio: " . $conn->error;
+$sql = "DELETE FROM Annuncio WHERE id = ? AND idUtente = ?";
+$stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die("Errore nella preparazione della query: " . $conn->error);
 }
 
+$stmt->bind_param("ii", $idA, $idUtente);
+
+if ($stmt->execute()) {
+    $_SESSION['status'] = "Annuncio eliminato con successo";
+} else {
+    $_SESSION['status'] = "Errore durante l'eliminazione dell'annuncio: " . $stmt->error;
+}
+
+$stmt->close();
 $conn->close();
 header("Location: ../front-end/profile.php");
-
+unset($_SESSION['status']);
 exit();
 ?>

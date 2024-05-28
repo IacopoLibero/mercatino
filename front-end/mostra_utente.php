@@ -48,7 +48,7 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                     include ('../connessione.php');
                                     $id = $_SESSION['id'];
-                                    $utente_da_mostrare = $_SESSION['utente_da_mostrare'];
+                                    $utente_da_mostrare = $_POST['utente_da_mostrare'];
                                     $query="SELECT COUNT(*) as num FROM Proposta WHERE Proposta.idUtente='$id'";
                                     $result = $conn->query($query);
                                     $row = $result->fetch_assoc();
@@ -87,7 +87,7 @@ if ($_SESSION['log'] == false) {
     </nav>
     <br>
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="card col-12 w-50">
+        <div class="card col-12">
             <div class="user text-center profile">
                 <?php
                     $sql = "SELECT foto_profilo FROM Utente WHERE id = '$utente_da_mostrare'";
@@ -237,28 +237,17 @@ if ($_SESSION['log'] == false) {
                                         echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                     echo "</div>";
                                 echo "</div>";
-                                echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                    echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo">Fai una proposta</button></div>';
+                                echo '<div class="card-footer p-4  pt-0 border-top-0 bg-transparent">';
+                                    echo "<form method='POST' class='row' action='../back-end/send_proposta.php'>";
+                                        echo "<input type='number' class=' col-xxl-xl-lg-md-sm-6' name='prezzo' id='prezzo'>";
+                                        echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                        echo "<input type='submit' class=' mx-3 col-xxl-xl-lg-md-sm-6 btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                    echo "</form>";
                                 echo '</div>';
                             echo "</div>";
                         }
                     }
                 ?>
-                <div class="modal" id="modal-offerta-prezzo">
-                <div class="modal-inner">
-    <form method="POST" action="../back-end/send_proposta.php">
-        <div class="mt-3 form-group">
-            <label for="prezzo" class="form-label">Inserisci il prezzo</label>
-            <input type="number" name="prezzo" id="prezzo" class="form-control" required>
-        </div>
-        <div class="mt-4 d-flex justify-content-between">
-            <button type="button" class="btn btn-secondary" id="closeModal-prezzo">CHIUDI</button>
-            <input type="submit" class="btn btn-primary" value="INVIA" name="submit">
-        </div>
-    </form>
-</div>
-
-                </div>
             </div>
         </div>
     </section>

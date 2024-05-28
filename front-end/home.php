@@ -173,38 +173,30 @@
                                             echo "</button>";
                                             echo "</div>";
                                         }
-                                        $_SESSION['utente_da_mostrare']=$row['id_da_mostrare'];
                                     echo "</div>";
                                     echo "<div class='card-body p-4'>";
                                         echo "<div class='text-center poetsen-one-regular'>";
                                             echo "<h5 class='card-title '>" . $row['nome'] . "</h5>";
                                             echo "<p class='card-text'>" . $row['categoria'] . "</p>";
                                             echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
-                                            echo "<a href='mostra_utente.php' class='card-text'>" . $row['mail'] . "</a>";
+
+                                            echo "<form method='POST'  action='mostra_utente.php'>";
+                                                echo "<input type='submit' class='card-text' value=". $row['mail']." >";
+                                                echo "<input type='hidden' name='utente_da_mostrare' value='" . $row['id_da_mostrare'] . "'>";
+                                            echo "</form>";
                                         echo "</div>";
                                     echo "</div>";
-                                    echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-                                        echo '<div class="text-center"><button class="btn btn-outline-dark mt-auto" id="openModal-prezzo">Fai una proposta</button></div>';
-                                    echo '</div>';
+                                        echo '<div class="card-footer  p-4  pt-0 border-top-0 bg-transparent">';
+                                            echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
+                                                echo "<input type='number' name='prezzo' id='prezzo'>";
+                                                echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                                echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                            echo "</form>";
+                                        echo '</div>';
                                 echo "</div>";
                             }
                         }
                     ?>
-                    <div class="modal" id="modal-offerta-prezzo">
-                    <div class="modal-inner">
-                        <form method="POST" action="../back-end/send_proposta.php">
-                            <div class="mt-3 form-group">
-                                <label for="prezzo" class="form-label">Inserisci il prezzo</label>
-                                <input type="number" name="prezzo" id="prezzo" class="form-control" required>
-                            </div>
-                            <div class="mt-4 d-flex justify-content-between">
-                                <button type="button" class="btn btn-secondary" id="closeModal-prezzo">CHIUDI</button>
-                                <input type="submit" class="btn btn-primary" value="INVIA" name="submit">
-                            </div>
-                        </form>
-                    </div>
-
-                    </div>
                 </div>
             </div>
         </section>

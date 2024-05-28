@@ -22,26 +22,26 @@
             <h5 class="card-title">Registrazione</h5>
             <form method="POST" action="./scriptregistrazione.php">
                 Nome: <br>
-                <input type="text" name="nome" class="form-control" required ><br>
+                <input type="text" name="nome" class="form-control" required placeholder="Mario"><br>
                 
                 Cognome: <br>
-                <input type="text" name="cognome" class="form-control" required ><br>
+                <input type="text" name="cognome" class="form-control" required placeholder="Rossi"><br>
 
                 E-mail: <br>
-                <input type="email" name="email" class="form-control" required ><br>
+                <input type="email" name="email" class="form-control" required placeholder="example@gmail.com"><br>
                 
                 Classe:
-                <input type="text" name="classe" class="form-control" required ><br>
+                <input type="text" name="classe" class="form-control" required placeholder="1c"><br>
 
                 Username: <br>
-                <input type="text" name="username" class="form-control" required ><br>
+                <input type="text" name="username" class="form-control" required placeholder="username1"><br>
                 
                 Data di nascita: <br>
-                <input type="date" name="data_nascita" class="form-control" ><br>
+                <input type="date" name="data_nascita" class="form-control" placeholder="yyyy-mm-dd"><br>
 
                 Password: <br>
                 <div class="input-group">
-                    <input type="password" name="pw" id="psw" required class="form-control">
+                    <input type="password" name="pw" id="psw" required placeholder="password" class="form-control">
                     <span class="input-group-text" >
                         <i class="bi bi-eye-slash-fill" id="eye"></i>
                     </span>

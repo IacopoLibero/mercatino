@@ -89,7 +89,7 @@ if ($_SESSION['log'] == false) {
     </nav>
     <br>
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="card col-12 w-50">
+        <div class="card col-12 ">
             <div class="text-center profile">
                 <?php
                     $sql = "SELECT foto_profilo FROM Utente WHERE id = '$id'";
@@ -179,10 +179,10 @@ if ($_SESSION['log'] == false) {
                         </span><br>
                         <span>
                         <?php
-                            if(isset($_SESSION['elimina'])){
-                                echo '<p class="text-success h6">'. $_SESSION['elimina'].'</p>';
+                            if(isset($_SESSION['status'])){
+                                echo $_SESSION['status'];
                             }
-                            unset($_SESSION['elimina']);
+                            unset($_SESSION['status']);
                         ?>    
                     </span>
                     </div>

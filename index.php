@@ -27,11 +27,11 @@
                 <h5 class="card-title display-3 poetsen-one-regular">Login</h5>
                 <form method="POST" action="./login/login.php">
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Email:</label> <br>
-                <input type="email" name="email" required class="form-control"><br>
+                <input type="email" name="email" required placeholder="cognome.nome@itismeucci.com" class="form-control"><br>
 
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Password:</label>  <br>
                 <div class="input-group">
-                    <input type="password" name="pw" id="psw" required class="form-control">
+                    <input type="password" name="pw" id="psw" required placeholder="password" class="form-control">
                     <span class="input-group-text" >
                         <i class="bi bi-eye-slash-fill" id="eye"></i>
                     </span>
