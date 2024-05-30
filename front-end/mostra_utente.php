@@ -48,7 +48,11 @@ if ($_SESSION['log'] == false) {
                                     <?php
                                     include ('../connessione.php');
                                     $id = $_SESSION['id'];
-                                    $utente_da_mostrare = $_POST['utente_da_mostrare'];
+                                    if (isset($_POST['utente_da_mostrare'])) 
+                                    {
+                                        $utente_da_mostrare = $_POST['utente_da_mostrare'];
+                                    }
+                                    
                                     $query="SELECT COUNT(*) as num FROM Proposta WHERE Proposta.idUtente='$id'";
                                     $result = $conn->query($query);
                                     $row = $result->fetch_assoc();
@@ -175,12 +179,13 @@ if ($_SESSION['log'] == false) {
             <span class="name">TELEFONIA</span>
         </label>
     </div>
+    <input type="hidden" name="utente_da_mostrare" value="<?php echo $utente_da_mostrare ?>">
     <section>
         <div class="px-4 px-lg-5 mt-5 ">
             <div class=" row justify-content-center">
                 <?php
                     $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
-
+                    
                     $id = $_SESSION['id'];
                     $query = "SELECT Annuncio.id,Annuncio.nome as nome ,Categoria.nome as categoria,Annuncio.descrizione FROM Annuncio JOIN Categoria ON Annuncio.idCategoria=Categoria.id WHERE Annuncio.idUtente='$utente_da_mostrare'";
                     if ($selected_radio == 'inf') {
@@ -270,7 +275,10 @@ if ($_SESSION['log'] == false) {
     <script src="../js/script_home.js"></script>
 </body>
 </html>
+
 <script>
+var utente_da_mostrare = <?php echo json_encode($utente_da_mostrare); ?>;
+
 window.onload = function() {
     var radios = document.getElementsByName('radio');
 
@@ -285,10 +293,16 @@ window.onload = function() {
             hiddenField.setAttribute('name', 'radio');
             hiddenField.setAttribute('value', this.value);
 
+            var hiddenField2 = document.createElement('input');
+            hiddenField2.setAttribute('type', 'hidden');
+            hiddenField2.setAttribute('name', 'utente_da_mostrare');
+            hiddenField2.setAttribute('value', utente_da_mostrare);
+
             form.appendChild(hiddenField);
+            form.appendChild(hiddenField2);
             document.body.appendChild(form);
             form.submit();
         });
     }
 }
-</script>    
+</script>

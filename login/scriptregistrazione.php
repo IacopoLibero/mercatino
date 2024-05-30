@@ -3,19 +3,28 @@
     include('../connessione.php');
 
     $nome = $_POST['nome'];
-    $cognome = $_POST['cognome'];
+    //controllo che il come sia stato passato correttamente
+    if (strpos($nome, ',') === false) {
+        $_SESSION['status_reg'] = "Il campo nome deve contenere una virgola.";
+        header("Location: ../index.php");
+        exit();
+    }
+    $nomeArray = explode(',', $nome);
+    $nome = $nomeArray[0];
+    $cognome = $nomeArray[1];
     $email = $_POST['email'];
-    $username = $_POST['username'];
     $classe=$_POST['classe'];
+    $username = $nome."_".$classe;
     $data_nascita = $_POST['data_nascita'];
     $password = $_POST['pw'];
 
     // Controllo se la password soddisfa i requisiti
     if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/", $password)) {
-        $_SESSION['status'] = "La password deve essere di almeno 8 caratteri, contenere una lettera maiuscola, una cifra e un carattere speciale.";
-        header("Location: registrazione.php");
+        $_SESSION['status_reg'] = "La password deve essere di almeno 8 caratteri, contenere una lettera maiuscola, una cifra e un carattere speciale.";
+        header("Location: ../index.php");
         exit();
     }
+    
 
     $password = hash("sha256", $password);
 
@@ -34,13 +43,13 @@
         } 
         else 
         {
-            $_SESSION['status'] = "Email gia esistente";
-            header("Location: registrazione.php");
+            $_SESSION['status_reg'] = "Email gia esistente";
+            header("Location: ../index.php");
         }
     }
     else 
     {
-        $_SESSION['status'] = "Utente gia esistente";
-        header("Location: registrazione.php");
+        $_SESSION['status_reg'] = "Utente gia esistente";
+        header("Location: ../index.php");
     }
 ?>
