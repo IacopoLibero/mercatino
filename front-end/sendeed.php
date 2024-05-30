@@ -89,13 +89,22 @@
                         
 
                         $id = $_SESSION['id'];
-                        $query = "SELECT Proposta.prezzo as prezzo,Proposta.id as idproposta,Proposta.idUtente as idutente, Proposta.data_pubblicazione as dataP,Annuncio.nome as nome,Proposta.stato as stato,Annuncio.id as idannuncio,Utente.email as mail FROM Proposta JOIN Annuncio ON Proposta.idAnnuncio=Annuncio.id JOIN Utente ON Proposta.idUtente=Utente.id WHERE  Proposta.idUtente='$id'";
+                        $query = "SELECT Proposta.prezzo as prezzo,Proposta.id as idproposta,Proposta.idUtente as idutente, Proposta.data_pubblicazione as dataP,Annuncio.nome as nome,Proposta.stato as stato,Annuncio.id as idannuncio FROM Proposta JOIN Annuncio ON Proposta.idAnnuncio=Annuncio.id JOIN Utente ON Proposta.idUtente=Utente.id WHERE  Proposta.idUtente='$id'";
                         
+                       
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) 
                         {
-                            while ($row = $result->fetch_assoc()) 
+                            while ($row = $result->fetch_assoc())
                             {
+                                $idutente="SELECT Annuncio.idUtente FROM Annuncio JOIN Proposta ON Annuncio.id=Proposta.idAnnuncio WHERE Proposta.idUtente='$id'";
+                                $result_idutente=$conn->query($idutente);
+                                $row_idutente=$result_idutente->fetch_assoc();
+
+                                $mail="SELECT email FROM Utente WHERE id=".$row_idutente['idUtente']." ";
+                                
+                                $result_mail=$conn->query($mail);
+                                $row_mail=$result_mail->fetch_assoc();
                                 echo "<div class='card col-xxl-xl-3 col-lg-4 col-md-6 col-sm-12 mx-3 my-3' style='width: 18rem;'>";
                                     echo "<div class='card-body p-4'>";
                                         echo "<div class='text-center poetsen-one-regular'>";
@@ -103,8 +112,8 @@
                                             echo "<p class='card-text'>" . $row['prezzo'] . "€"."</p>";
                                             echo "<p class='card-text'>" . $row['dataP'] . "</p>";
                                             echo "<form method='POST'  action='mostra_utente.php'>";
-                                                echo "<input type='submit' class='card-text' value=". $row['mail']." >";
-                                                echo "<input type='hidden' name='utente_da_mostrare' value='" . $row['idutente'] . "'>";
+                                                echo "<input type='submit' class='card-text' value=". $row_mail['email']." >";
+                                                echo "<input type='hidden' name='utente_da_mostrare' value='" . $row_idutente['idUtente']. "'>";
                                             echo "</form>";
                                             if($row['stato']=='r')
                                             {

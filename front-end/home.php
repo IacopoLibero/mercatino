@@ -198,7 +198,7 @@
                                         else
                                         {
                                             echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
-                                                echo "<input type='number' name='prezzo' id='prezzo'>";
+                                                echo "<input type='number' name='prezzo' min='1' id='prezzo'>";
                                                 echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
                                                 echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
                                             echo "</form>";

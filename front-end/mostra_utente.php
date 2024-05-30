@@ -152,6 +152,7 @@ if ($_SESSION['log'] == false) {
     <?php
         $selected_radio = isset($_POST['radio']) ? $_POST['radio'] : 'all';
     ?>
+    
     <div class="radio-inputs row text-center">
         <label class="radio col-12">
             <input type="radio" name="radio" value="all" <?php echo ($selected_radio == 'all') ? 'checked' : '' ?>>
@@ -237,12 +238,24 @@ if ($_SESSION['log'] == false) {
                                         echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
                                     echo "</div>";
                                 echo "</div>";
+                                
                                 echo '<div class="card-footer  p-4  pt-0 border-top-0 bg-transparent">';
-                                    echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
-                                        echo "<input type='number' name='prezzo' id='prezzo'>";
-                                        echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
-                                        echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
-                                    echo "</form>";
+                                    $offerta = "SELECT prezzo FROM Proposta WHERE idAnnuncio=" . $row['id'] . " AND idUtente=" . $_SESSION['id'];
+                                    $resultOfferta = $conn->query($offerta);
+                                    if ($resultOfferta->num_rows > 0) 
+                                    {
+                                        $rowOfferta = $resultOfferta->fetch_assoc();
+                                        echo "<br>";
+                                        echo "<p class='card-text  text-danger text-center'>Hai già fatto un'offerta di " . $rowOfferta['prezzo'] . "€</p>";
+                                    }
+                                    else
+                                    {
+                                        echo "<form method='POST' style='display:flex' action='../back-end/send_proposta.php'>";
+                                            echo "<input type='number' name='prezzo' min='1' id='prezzo'>";
+                                            echo "<input type='submit' class=' mx-3  btn btn-outline-dark mt-auto' value='Invia la proposta' >";
+                                            echo "<input type='hidden' name='id_annuncio' value='" . $row['id'] . "'>";
+                                        echo "</form>";
+                                    }
                                 echo '</div>';
                             echo "</div>";
                         }
