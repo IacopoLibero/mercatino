@@ -9,7 +9,8 @@
     {
         include('../connessione.php');
         $id = $_SESSION['id'];
-        $prezzo=$_POST['prezzo'];
+        $prezzo=htmlspecialchars($_POST['prezzo']);
+
         $id_ann=$_POST['id_annuncio'];
         $sql="INSERT INTO Proposta (prezzo,idAnnuncio,idUtente) VALUES ('$prezzo','$id_ann','$id')";
         $r=$conn->query($sql);

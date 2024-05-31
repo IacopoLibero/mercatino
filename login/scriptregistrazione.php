@@ -2,7 +2,7 @@
     session_start();
     include('../connessione.php');
 
-    $nome = $_POST['nome'];
+    $nome =htmlspecialchars( $_POST['nome']);
     //controllo che il come sia stato passato correttamente
     if (strpos($nome, ',') === false) {
         $_SESSION['status_reg'] = "Il campo nome deve contenere una virgola.";
@@ -12,8 +12,8 @@
     $nomeArray = explode(',', $nome);
     $nome = $nomeArray[0];
     $cognome = $nomeArray[1];
-    $email = $_POST['email'];
-    $classe=$_POST['classe'];
+    $email = htmlspecialchars($_POST['email']);
+    $classe=htmlspecialchars($_POST['classe']);
     $username = $nome."_".$classe;
     $data_nascita = $_POST['data_nascita'];
     $password = $_POST['pw'];

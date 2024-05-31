@@ -2,8 +2,8 @@
 
 include('../connessione.php');  // Questo include il file di connessione in modo da poter utilizzare $conn in questa pagina
 session_start();
-$mail = $_POST['email'];
-$password =$_POST['pw'];
+$mail = htmlspecialchars($_POST['email']);
+$password =htmlspecialchars($_POST['pw']);
 $passw = hash("sha256",$password);
 
 // Imposta il login a false e l'utente a vuoto

@@ -6,9 +6,9 @@
     if(isset($_POST['submit'])) 
     {
         $target_dir = "../upload/";
-        $descrizione=$_POST['descrizione'];
+        $descrizione=htmlspecialchars($_POST['descrizione']);
         $categotia=$_POST['categoria'];
-        $nome=$_POST['nome'];
+        $nome=htmlspecialchars($_POST['nome']);
         $sql="INSERT INTO Annuncio (idUtente,nome,idCategoria,descrizione) VALUES ('$id','$nome','$categotia','$descrizione')";
         $conn->query($sql);
         $idAnnuncio = $conn->insert_id;
