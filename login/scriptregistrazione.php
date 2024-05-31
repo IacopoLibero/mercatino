@@ -19,7 +19,7 @@
     $password = $_POST['pw'];
 
     // Controllo se la password soddisfa i requisiti
-    if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/", $password)) {
+    if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$&?*])(?=.*[0-9])(?=.*[a-z]).{8,}$/", $password)) {
         $_SESSION['status_reg'] = "La password deve essere di almeno 8 caratteri, contenere una lettera maiuscola, una cifra e un carattere speciale.";
         header("Location: ../index.php");
         exit();

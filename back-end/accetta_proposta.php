@@ -15,8 +15,6 @@
         $conn->query($sql);
         $sql="UPDATE Proposta SET stato='a' WHERE id='$id_prp'";
         $conn->query($sql);
-        $sql= "DELETE FROM Annuncio WHERE id='$id_ann'";
-        $conn->query($sql);
         
         header("Location: ../front-end/recived.php");
     }
