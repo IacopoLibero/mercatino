@@ -108,7 +108,7 @@
                                             echo "</form>";
                                             if($row['stato']==null)
                                             {
-                                                echo "<div class='mt-3 text-center' style='display:flex'>";
+                                                echo "<div class='mt-3 text-center mx-3' style='display:flex'>";
                                                     echo "<form method='POST'  action='../back-end/rifiuta_proposta.php'>";
                                                         echo "<input type='submit' class='btn btn-danger mx-2' value='Rifiuta' >";
                                                         echo "<input type='hidden' name='idproposta' value='" . $row['idproposta'] . "'>";
