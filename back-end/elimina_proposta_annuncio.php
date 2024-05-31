@@ -13,7 +13,7 @@
         $id_ann=$_POST['idAnnuncio'];
         $sql="DELETE FROM Proposta WHERE id='$id_prp'";
         $conn->query($sql);
-        $sql="DELETE Annuncio WHERE id='$id_ann'";
+        $sql="DELETE FROM Annuncio WHERE id='$id_ann'";
         $conn->query($sql);
         
         header("Location: ../front-end/sendeed.php");
