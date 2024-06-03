@@ -159,7 +159,7 @@
                                                 } else {
                                                     echo "<div class='carousel-item'>";
                                                 }
-                                                echo "<img class='d-block w-100' src='" . $rowfoto['url_foto'] . "' style='height: 300px; width: 300px; object-fit: cover;'";
+                                                echo "<img class='d-block w-100' src='" . $rowfoto['url_foto'] . "' style='height: 100%; width: 100%; object-fit: cover;'";
                                                 echo "</div>";
                                             }
                                             echo "</div>";
