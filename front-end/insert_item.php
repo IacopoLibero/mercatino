@@ -104,10 +104,10 @@ if ($_SESSION['log'] == false) {
                 </div>
                 <br>
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Nome articolo</label>
-                <input type="text" name="nome" aria-label="Large" class="form-control text-center">
+                <input type="text" name="nome" aria-label="Large" class="form-control text-center" required>
                 <br>
                 <label class="form-label poetsen-one-regular" style="font-family: 48px">Descrizione (max 150 caratteri)</label>
-                <input type="text" name="descrizione" aria-label="Large" class="form-control text-center">
+                <input type="text" name="descrizione" aria-label="Large" class="form-control text-center" required>
                 <br>
                 <?php
                     $query = "SELECT * FROM Categoria";
