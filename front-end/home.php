@@ -159,7 +159,7 @@
                                                 } else {
                                                     echo "<div class='carousel-item'>";
                                                 }
-                                                echo "<img class='d-block w-100' src='" . $rowfoto['url_foto'] . "' height='30%' width='30%'>'";
+                                                echo "<img class='d-block w-100' src='" . $rowfoto['url_foto'] . "' style='height: 300px; width: 300px; object-fit: cover;'";
                                                 echo "</div>";
                                             }
                                             echo "</div>";
@@ -174,14 +174,14 @@
                                             echo "</div>";
                                         }
                                     echo "</div>";
-                                    echo "<div class='card-body p-4'>";
+                                    echo "<div class='card-body p-4 row'>";
                                         echo "<div class='text-center poetsen-one-regular'>";
-                                            echo "<h5 class='card-title '>" . $row['nome'] . "</h5>";
-                                            echo "<p class='card-text'>" . $row['categoria'] . "</p>";
-                                            echo "<p class='card-text'>" . $row['descrizione'] . "</p>";
+                                            echo "<h5 class='card-title col-12 '>" . $row['nome'] . "</h5>";
+                                            echo "<p class='card-text col-12'>" . $row['categoria'] . "</p>";
+                                            echo "<p class='card-text col-12'>" . $row['descrizione'] . "</p>";
 
                                             echo "<form method='POST'  action='mostra_utente.php'>";
-                                                echo "<input type='submit' class='card-text' value=". $row['mail']." >";
+                                                echo "<input type='submit' class='card-text col-12' value=". $row['mail']." >";
                                                 echo "<input type='hidden' name='utente_da_mostrare' value='" . $row['id_da_mostrare'] . "'>";
                                             echo "</form>";
                                         echo "</div>";

@@ -107,12 +107,12 @@
                                 $row_mail=$result_mail->fetch_assoc();
                                 echo "<div class='card col-xxl-xl-3 col-lg-4 col-md-6 col-sm-12 mx-3 my-3' style='width: 18rem;'>";
                                     echo "<div class='card-body p-4'>";
-                                        echo "<div class='text-center poetsen-one-regular'>";
-                                            echo "<h5 class='card-title '>" . $row['nome'] . "</h5>";
-                                            echo "<p class='card-text'>" . $row['prezzo'] . "€"."</p>";
-                                            echo "<p class='card-text'>" . $row['dataP'] . "</p>";
+                                        echo "<div class='text-center poetsen-one-regular row'>";
+                                            echo "<h5 class='card-title col-12'>" . $row['nome'] . "</h5>";
+                                            echo "<p class='card-text col-12'>" . $row['prezzo'] . "€"."</p>";
+                                            echo "<p class='card-text col-12'>" . $row['dataP'] . "</p>";
                                             echo "<form method='POST'  action='mostra_utente.php'>";
-                                                echo "<input type='submit' class='card-text' value=". $row_mail['email']." >";
+                                                echo "<input type='submit' class='card-text col-12' value=". $row_mail['email']." >";
                                                 echo "<input type='hidden' name='utente_da_mostrare' value='" . $row_idutente['idUtente']. "'>";
                                             echo "</form>";
                                             if($row['stato']=='r')
