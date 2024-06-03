@@ -91,7 +91,6 @@
                         $id = $_SESSION['id'];
                         $query = "SELECT Proposta.prezzo as prezzo,Proposta.id as idproposta,Proposta.idUtente as idutente, Proposta.data_pubblicazione as dataP,Annuncio.nome as nome,Proposta.stato as stato,Annuncio.id as idannuncio FROM Proposta JOIN Annuncio ON Proposta.idAnnuncio=Annuncio.id JOIN Utente ON Proposta.idUtente=Utente.id WHERE  Proposta.idUtente='$id'";
                         
-                       
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) 
                         {
